@@ -1,0 +1,403 @@
+{
+    "added": {
+        "osd.yaml.in": [
+            "osd_scrub_reservation_timeout",
+            "osd_scrub_slow_reservation_response"
+        ],
+        "crimson.yaml.in": [
+            "crimson_seastar_smp"
+        ],
+        "global.yaml.in": [
+            "leveldb_write_buffer_size",
+            "bluestore_debug_inject_bug21040",
+            "leveldb_block_size",
+            "leveldb_compact_on_mount",
+            "mon_debug_no_require_quincy",
+            "leveldb_cache_size",
+            "leveldb_compression",
+            "leveldb_bloom_size",
+            "leveldb_log_to_ceph_log",
+            "leveldb_max_open_files",
+            "osd_pg_stat_report_interval_max",
+            "bluestore_debug_prefill",
+            "leveldb_log",
+            "osd_skip_check_past_interval_bounds",
+            "leveldb_paranoid"
+        ]
+    },
+    "deleted": {
+        "mds.yaml.in": [
+            "mds_cache_quiesce_splitauth",
+            "mds_cache_quiesce_decay_rate",
+            "mds_file_blockdiff_max_concurrent_object_scans",
+            "mds_kill_shutdown_at",
+            "mds_log_trim_threshold",
+            "mds_log_event_large_threshold",
+            "mds_log_minor_segments_per_major_segment",
+            "mds_bal_overload_epochs",
+            "mds_cache_quiesce_sleep",
+            "mds_cache_quiesce_threshold",
+            "mds_log_trim_upkeep_interval",
+            "mds_log_trim_decay_rate",
+            "mds_cache_quiesce_delay",
+            "mds_log_skip_unbounded_events"
+        ],
+        "mds-client.yaml.in": [
+            "client_file_blockdiff_max_concurrent_object_scans"
+        ],
+        "osd.yaml.in": [
+            "osd_debug_trim_objects",
+            "osd_scrub_disable_reservation_queuing"
+        ],
+        "mon.yaml.in": [
+            "mon_fsmap_prune_threshold"
+        ],
+        "crimson.yaml.in": [
+            "seastore_disable_end_to_end_data_protection",
+            "crimson_seastar_num_threads",
+            "seastore_max_data_allocation_size",
+            "crimson_osd_stat_interval",
+            "crimson_seastar_cpu_cores",
+            "seastore_full_integrity_check",
+            "seastore_data_delta_based_overwrite"
+        ],
+        "global.yaml.in": [
+            "qat_compressor_busy_polling",
+            "mgr_op_history_slow_op_threshold",
+            "service_unique_id",
+            "bluestore_fragmentation_check_period",
+            "mgr_op_history_duration",
+            "bluestore_bdev_label_multi_upgrade",
+            "osd_pg_stat_report_interval_max_seconds",
+            "bluestore_warn_on_free_fragmentation",
+            "mon_debug_no_require_squid",
+            "tmp_dir",
+            "mgr_enable_op_tracker",
+            "osd_pg_stat_report_interval_max_epochs",
+            "tmp_file_template",
+            "osd_pool_default_read_ratio",
+            "mgr_op_log_threshold",
+            "bluestore_bdev_label_require_all",
+            "bluestore_elastic_shared_blobs",
+            "mgr_op_history_slow_op_size",
+            "mgr_op_complaint_time",
+            "mgr_num_op_tracker_shard",
+            "mgr_op_history_size",
+            "bluestore_bdev_label_multi"
+        ],
+        "rgw.yaml.in": [
+            "rgw_account_default_quota_max_objects",
+            "rgw_user_counters_cache_size",
+            "rgw_parquet_buffer_size",
+            "rgw_topic_require_publish_policy",
+            "rgw_keystone_accepted_reader_roles",
+            "rgw_bucket_counters_cache",
+            "rgw_s3_auth_disable_signature_url",
+            "rgw_posix_database_root",
+            "rgw_lua_max_memory_per_state",
+            "rgw_d4n_port",
+            "rgw_d4n_host",
+            "rgw_posix_cache_lanes",
+            "rgw_topic_persistency_max_retries",
+            "rgw_topic_persistency_time_to_live",
+            "rgw_bucket_counters_cache_size",
+            "rgw_topic_persistency_sleep_duration",
+            "rgw_disable_s3select",
+            "rgw_posix_cache_lmdb_count",
+            "rgw_debug_inject_latency_bi_unlink",
+            "rgw_posix_base_path",
+            "rgw_user_counters_cache",
+            "rgw_torrent_max_size",
+            "rgw_account_default_quota_max_size",
+            "rgw_posix_cache_max_buckets",
+            "rgw_kafka_sleep_timeout",
+            "rgw_posix_cache_partitions"
+        ]
+    },
+    "modified": {
+        "mds.yaml.in": {
+            "mds_log_max_events": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                }
+            },
+            "mds_log_max_segments": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "min": {
+                    "before": 8,
+                    "after": ""
+                }
+            },
+            "mds_log_pause": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                }
+            },
+            "mds_log_events_per_segment": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "min": {
+                    "before": 1,
+                    "after": ""
+                },
+                "type": {
+                    "before": "uint",
+                    "after": "int"
+                }
+            },
+            "mds_log_skip_corrupt_events": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_inject_journal_corrupt_dentry_first": {
+                "flags": {
+                    "before": "",
+                    "after": [
+                        "runtime"
+                    ]
+                }
+            }
+        },
+        "rbd-mirror.yaml.in": {
+            "rbd_mirror_image_policy_rebalance_timeout": {
+                "desc": {
+                    "before": "number of seconds policy should be idle before triggering reshuffle (rebalance) of images",
+                    "after": "number of seconds policy should be idle before trigerring reshuffle (rebalance) of images"
+                }
+            }
+        },
+        "mds-client.yaml.in": {
+            "client_permissions": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            }
+        },
+        "osd.yaml.in": {
+            "osd_scrub_chunk_min": {
+                "fmt_desc": {
+                    "before": "The minimum number of objects to scrub during single operation. Also serves as a minimal chunk size even after scrubbing is preempted by client operations and the effective chunk size is halved.",
+                    "after": "The minimal number of object store chunks to scrub during single operation. Ceph blocks writes to single chunk during scrub."
+                }
+            },
+            "osd_scrub_backoff_ratio": {
+                "long_desc": {
+                    "before": "Probability that a particular OSD tick instance will skip scrub scheduling. 66% means that approximately one of three ticks will cause scrub scheduling.",
+                    "after": "This is the precentage of ticks that do NOT schedule scrubs, 66% means that 1 out of 3 ticks will schedule scrubs"
+                }
+            },
+            "osd_scrub_auto_repair_num_errors": {
+                "desc": {
+                    "before": "Maximum number of damaged objects to automatically repair",
+                    "after": "Maximum number of detected errors to automatically repair"
+                },
+                "fmt_desc": {
+                    "before": "Scrub will not perform automatic repair if more than this many damaged objects are found.",
+                    "after": "Auto repair will not occur if more than this many errors are found."
+                }
+            },
+            "osd_scrub_max_interval": {
+                "desc": {
+                    "before": "Scrub each PG no less often than this interval",
+                    "after": "Scrub each PG no less often than this interval. Note that this option must be set at ``global`` scope, or for both ``mgr`` and``osd``."
+                },
+                "fmt_desc": {
+                    "before": "The maximum interval in seconds for scrubbing the Ceph OSD Daemon irrespective of cluster load.",
+                    "after": "The maximum interval in seconds for scrubbing each PG."
+                }
+            },
+            "osd_scrub_auto_repair": {
+                "fmt_desc": {
+                    "before": "Setting this to ``true`` will enable automatic PG repair when errors are found by scrubs or deep-scrubs.  However, if more than ``osd_scrub_auto_repair_num_errors`` damaged objects are found a repair is NOT performed.",
+                    "after": "Setting this to ``true`` will enable automatic PG repair when errors are found by scrubs or deep-scrubs.  However, if more than ``osd_scrub_auto_repair_num_errors`` errors are found a repair is NOT performed."
+                }
+            },
+            "osd_scrub_min_interval": {
+                "desc": {
+                    "before": "The desired interval between scrubs of a specific PG.",
+                    "after": "The desired interval between scrubs of a specific PG. Note that this option must be set at ``global`` scope, or for both ``mgr`` and``osd``."
+                },
+                "fmt_desc": {
+                    "before": "The desired interval in seconds between scrubs of a specific PG when the Ceph Storage Cluster load is low.",
+                    "after": "The desired interval in seconds between scrubs of a specific PG."
+                }
+            },
+            "osd_deep_scrub_interval": {
+                "desc": {
+                    "before": "Deep scrub each PG (i.e., verify data checksums) at least this often",
+                    "after": "Deep scrub each PG (i.e., verify data checksums) at least this often. Note that this option must be set at ``global`` scope, or for both ``mgr`` and``osd``."
+                },
+                "fmt_desc": {
+                    "before": "The interval for \"deep\" scrubbing (fully reading all data). The ``osd_scrub_load_threshold`` does not affect this setting.",
+                    "after": "The interval for \"deep\" scrubbing (fully reading all data)."
+                }
+            },
+            "osd_backfill_scan_max": {
+                "fmt_desc": {
+                    "before": "The maximum number of objects per backfill scan.",
+                    "after": "The maximum number of objects per backfill scan.p"
+                }
+            }
+        },
+        "crimson.yaml.in": {
+            "crimson_alien_thread_cpu_cores": {
+                "flags": {
+                    "before": [
+                        "startup"
+                    ],
+                    "after": ""
+                }
+            },
+            "crimson_osd_obc_lru_size": {
+                "default": {
+                    "before": 512,
+                    "after": 10
+                }
+            }
+        },
+        "global.yaml.in": {
+            "mon_keyvaluedb": {
+                "enum_values": {
+                    "before": [
+                        "rocksdb"
+                    ],
+                    "after": [
+                        "leveldb",
+                        "rocksdb"
+                    ]
+                }
+            },
+            "bluestore_allocator": {
+                "enum_values": {
+                    "before": [
+                        "bitmap",
+                        "stupid",
+                        "avl",
+                        "btree",
+                        "hybrid",
+                        "hybrid_btree2"
+                    ],
+                    "after": [
+                        "bitmap",
+                        "stupid",
+                        "avl",
+                        "btree",
+                        "hybrid",
+                        "zoned",
+                        "hybrid_btree2"
+                    ]
+                }
+            },
+            "bdev_async_discard_max_pending": {
+                "see_also": {
+                    "before": [
+                        "bdev_async_discard_threads"
+                    ],
+                    "after": [
+                        "bdev_enable_discard"
+                    ]
+                }
+            },
+            "bdev_type": {
+                "enum_values": {
+                    "before": [
+                        "aio",
+                        "spdk",
+                        "pmem"
+                    ],
+                    "after": [
+                        "aio",
+                        "spdk",
+                        "pmem",
+                        "hm_smr"
+                    ]
+                }
+            }
+        },
+        "rgw.yaml.in": {
+            "rgw_sts_min_session_duration": {
+                "see_also": {
+                    "before": [
+                        "rgw_sts_max_session_duration"
+                    ],
+                    "after": ""
+                },
+                "long_desc": {
+                    "before": "This option can be used to configure the lower limit of durationSeconds of temporary credentials returned by 'AssumeRole*' calls.",
+                    "after": ""
+                }
+            },
+            "rgw_cache_lru_size": {
+                "default": {
+                    "before": 25000,
+                    "after": 10000
+                }
+            },
+            "rgw_admin_entry": {
+                "long_desc": {
+                    "before": "Note that multisite replication requires the value admin, so this option must be left at the default in such deployments.",
+                    "after": ""
+                }
+            },
+            "rgw_filter": {
+                "enum_values": {
+                    "before": [
+                        "none",
+                        "base",
+                        "d4n",
+                        "posix"
+                    ],
+                    "after": [
+                        "none",
+                        "base",
+                        "trace"
+                    ]
+                },
+                "long_desc": {
+                    "before": "defaults to none. Other valid values are base and d4n (both experimental).",
+                    "after": "defaults to none. Other valid values are base and trace (both experimental)."
+                }
+            },
+            "rgw_luarocks_location": {
+                "default": {
+                    "before": "/tmp/rgw_luarocks/$name",
+                    "after": "@rgw_luarocks_location@"
+                }
+            },
+            "rgw_sts_max_session_duration": {
+                "see_also": {
+                    "before": [
+                        "rgw_sts_min_session_duration"
+                    ],
+                    "after": ""
+                },
+                "long_desc": {
+                    "before": "This option can be used to configure the upper limit of the durationSeconds of temporary credentials returned by 'GetSessionToken'.",
+                    "after": "Max duration in seconds for which the session token is valid."
+                }
+            }
+        }
+    }
+}

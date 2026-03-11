@@ -1,0 +1,1047 @@
+{
+    "added": {
+        "osd.yaml.in": [
+            "osd_scrub_reservation_timeout",
+            "osd_repair_during_recovery",
+            "osd_scrub_slow_reservation_response"
+        ],
+        "crimson.yaml.in": [
+            "crimson_seastar_smp"
+        ],
+        "global.yaml.in": [
+            "leveldb_bloom_size",
+            "leveldb_max_open_files",
+            "leveldb_compact_on_mount",
+            "leveldb_cache_size",
+            "bluefs_check_volume_selector_on_umount",
+            "leveldb_log_to_ceph_log",
+            "osd_pg_stat_report_interval_max",
+            "mon_debug_no_require_reef",
+            "leveldb_block_size",
+            "leveldb_compression",
+            "bluestore_debug_prefill",
+            "bluestore_debug_inject_bug21040",
+            "leveldb_paranoid",
+            "leveldb_log",
+            "leveldb_write_buffer_size",
+            "mon_debug_no_require_quincy",
+            "filestore_debug_random_read_err"
+        ],
+        "mon.yaml.in": [
+            "mon_osd_max_creating_pgs"
+        ],
+        "rgw.yaml.in": [
+            "rgw_keystone_api_version",
+            "rgw_data_log_obj_prefix"
+        ]
+    },
+    "deleted": {
+        "osd.yaml.in": [
+            "osd_scrub_retry_pg_state",
+            "osd_scrub_retry_after_noscrub",
+            "osd_scrub_disable_reservation_queuing",
+            "osd_ec_partial_reads",
+            "osd_scrub_retry_new_interval",
+            "osd_scrub_retry_trimming",
+            "osd_scrub_retry_delay",
+            "osd_debug_trim_objects"
+        ],
+        "ceph-exporter.yaml.in": [
+            "exporter_key_file",
+            "exporter_cert_file"
+        ],
+        "mds.yaml.in": [
+            "mds_file_blockdiff_max_concurrent_object_scans",
+            "mds_cache_quiesce_splitauth",
+            "mds_cache_quiesce_decay_rate",
+            "mds_kill_dirfrag_at",
+            "mds_log_minor_segments_per_major_segment",
+            "mds_kill_shutdown_at",
+            "mds_cache_quiesce_sleep",
+            "mds_cache_quiesce_delay",
+            "mds_delay_journal_replay_for_testing",
+            "mds_cache_quiesce_threshold",
+            "mds_log_trim_decay_rate",
+            "mds_bal_overload_epochs",
+            "mds_log_event_large_threshold",
+            "mds_scrub_stats_review_period",
+            "mds_log_trim_threshold",
+            "mds_server_dispatch_client_request_delay",
+            "mds_server_dispatch_killpoint_random",
+            "mds_log_trim_upkeep_interval",
+            "mds_log_skip_unbounded_events"
+        ],
+        "crimson.yaml.in": [
+            "seastore_data_delta_based_overwrite",
+            "crimson_reactor_idle_poll_time_us",
+            "seastore_full_integrity_check",
+            "crimson_seastar_num_threads",
+            "crimson_osd_stat_interval",
+            "seastore_disable_end_to_end_data_protection",
+            "crimson_seastar_cpu_cores",
+            "seastore_max_data_allocation_size",
+            "crimson_reactor_task_quota_ms",
+            "crimson_reactor_io_latency_goal_ms",
+            "crimson_osd_objectstore"
+        ],
+        "global.yaml.in": [
+            "osd_pg_stat_report_interval_max_epochs",
+            "mon_debug_no_require_squid",
+            "osd_pool_default_read_ratio",
+            "mgr_op_complaint_time",
+            "uadk_compressor_enabled",
+            "mgr_op_history_size",
+            "ceph_assert_supresssions",
+            "mgr_op_history_slow_op_size",
+            "bluestore_onode_segment_size",
+            "mgr_num_op_tracker_shard",
+            "osd_pg_stat_report_interval_max_seconds",
+            "bluestore_debug_extent_map_encode_check",
+            "bluestore_recompression_min_gain",
+            "rados_replica_read_policy",
+            "bluefs_check_volume_selector_on_mount",
+            "bluestore_bdev_label_multi_upgrade",
+            "bluestore_bdev_label_require_all",
+            "mon_client_hunt_on_resend",
+            "mon_max_nvmeof_epochs",
+            "bluestore_write_v2_random",
+            "bluestore_debug_enforce_min_alloc_size",
+            "osd_objectstore_ideal_list_max",
+            "bluestore_allocator_lookup_policy",
+            "tmp_file_template",
+            "osd_pool_default_flag_ec_optimizations",
+            "bdev_aio_submit_retry_max",
+            "mgr_op_history_slow_op_threshold",
+            "mgr_op_history_duration",
+            "bdev_aio_submit_retry_initial_delay_us",
+            "bluestore_write_v2",
+            "uadk_wd_sync_ctx_num",
+            "qat_compressor_busy_polling",
+            "ec_extent_cache_size",
+            "bluestore_bdev_label_multi",
+            "bluestore_fragmentation_check_period",
+            "rados_replica_read_policy_on_objclass",
+            "mgr_enable_op_tracker",
+            "tmp_dir",
+            "mgr_op_log_threshold",
+            "mon_debug_no_require_tentacle",
+            "ms_time_events_min_wait_interval",
+            "ec_pdw_write_mode",
+            "ms_client_throttle_retry_time_interval",
+            "bluefs_wal_envelope_mode",
+            "bluestore_elastic_shared_blobs",
+            "bluestore_debug_onode_segmentation_random",
+            "bluestore_warn_on_free_fragmentation",
+            "service_unique_id"
+        ],
+        "mds-client.yaml.in": [
+            "client_file_blockdiff_max_concurrent_object_scans"
+        ],
+        "mon.yaml.in": [
+            "mon_nvmeofgw_wrong_map_ignore_sec",
+            "mon_nvmeofgw_set_group_id_retry",
+            "nvmeof_mon_client_connect_panic",
+            "mon_fsmap_prune_threshold",
+            "pool_availability_update_interval",
+            "enable_availability_tracking",
+            "nvmeof_mon_client_tick_period",
+            "mon_nvmeofgw_delete_grace",
+            "nvmeof_mon_client_disconnect_panic",
+            "mon_nvmeofgw_skip_failovers_interval",
+            "mon_nvmeofgw_beacon_grace",
+            "mon_nvmeofgw_beacons_till_ack"
+        ],
+        "rgw.yaml.in": [
+            "rgw_posix_cache_max_buckets",
+            "rgw_posix_cache_partitions",
+            "rgw_disable_s3select",
+            "rgw_d4n_l1_write_open_flags",
+            "rgw_bucket_counters_cache_size",
+            "rgw_reshard_debug_interval",
+            "rgw_d4n_l1_fadvise",
+            "rgw_posix_database_root",
+            "rgw_d4n_libaio_aio_num",
+            "rgw_graceful_stop",
+            "rgw_d4n_cache_cleaning_interval",
+            "rgw_restore_processor_period",
+            "rgw_topic_persistency_time_to_live",
+            "rgw_d4n_libaio_aio_threads",
+            "rgw_topic_persistency_sleep_duration",
+            "rgw_enable_restore_threads",
+            "rgw_keystone_accepted_reader_roles",
+            "rgw_max_control_aio",
+            "rgw_bucket_counters_cache",
+            "rgw_d4n_l1_evict_cache_on_start",
+            "rgw_s3_auth_disable_signature_url",
+            "rgw_restore_max_objs",
+            "rgw_user_counters_cache_size",
+            "rgw_lfuda_sync_frequency",
+            "rgw_restore_debug_interval",
+            "rgw_parquet_buffer_size",
+            "rgw_lua_max_memory_per_state",
+            "rgw_posix_cache_lanes",
+            "rgw_reshardlog_threshold",
+            "rgw_d4n_address",
+            "rgw_dynamic_resharding_may_reduce",
+            "rgw_debug_inject_latency_bi_unlink",
+            "rgw_reshard_progress_judge_interval",
+            "rgw_user_counters_cache",
+            "rgw_asio_assert_yielding",
+            "rgw_lua_enable",
+            "rgw_enable_mdsearch",
+            "rgw_posix_base_path",
+            "rgw_d4n_l1_datacache_persistent_path",
+            "rgw_account_default_quota_max_objects",
+            "rgw_torrent_max_size",
+            "rgw_reshard_progress_judge_ratio",
+            "rgw_d4n_l1_datacache_size",
+            "rgw_dynamic_resharding_reduction_wait",
+            "rgw_d4n_l1_datacache_address",
+            "rgw_account_default_quota_max_size",
+            "rgw_posix_cache_lmdb_count",
+            "rgw_topic_require_publish_policy",
+            "rgw_nfs_run_restore_threads",
+            "rgw_kafka_sleep_timeout",
+            "rgw_bucket_logging_obj_roll_time",
+            "rgw_d4n_backend_address",
+            "d4n_writecache_enabled",
+            "rgw_lua_max_runtime_per_state",
+            "rgw_topic_persistency_max_retries",
+            "rgw_restore_lock_max_time"
+        ],
+        "mgr.yaml.in": [
+            "mon_warn_on_pool_no_app_grace",
+            "mgr_max_pg_creating"
+        ]
+    },
+    "modified": {
+        "osd.yaml.in": {
+            "osd_class_default_list": {
+                "default": {
+                    "before": "cephfs hello journal lock log numops otp rbd refcount rgw rgw_gc timeindex user version cas cmpomap queue 2pc_queue fifo sem_set",
+                    "after": "cephfs hello journal lock log numops otp rbd refcount rgw rgw_gc timeindex user version cas cmpomap queue 2pc_queue fifo"
+                }
+            },
+            "osd_scrub_end_hour": {
+                "fmt_desc": {
+                    "before": "This restricts scrubbing to the hours earlier than this. Use ``osd_scrub_begin_hour = 0`` and ``osd_scrub_end_hour = 0`` to allow scrubbing for the entire day.  Along with ``osd_scrub_begin_hour``, they define a time window, only in which can periodic scrubs be automatically initiated.",
+                    "after": "This restricts scrubbing to the hour earlier than this. Use ``osd_scrub_begin_hour = 0`` and ``osd_scrub_end_hour = 0`` to allow scrubbing for the entire day.  Along with ``osd_scrub_begin_hour``, they define a time window, in which the scrubs can happen. But a scrub will be performed no matter whether the time window allows or not, as long as the placement group's scrub interval exceeds ``osd_scrub_max_interval``."
+                }
+            },
+            "osd_scrub_auto_repair_num_errors": {
+                "desc": {
+                    "before": "Maximum number of damaged objects to automatically repair",
+                    "after": "Maximum number of detected errors to automatically repair"
+                },
+                "fmt_desc": {
+                    "before": "Scrub will not perform automatic repair if more than this many damaged objects are found.",
+                    "after": "Auto repair will not occur if more than this many errors are found."
+                }
+            },
+            "osd_shallow_scrub_chunk_max": {
+                "with_legacy": {
+                    "before": false,
+                    "after": true
+                }
+            },
+            "osd_deep_scrub_randomize_ratio": {
+                "long_desc": {
+                    "before": "",
+                    "after": "This prevents a deep scrub 'stampede' by spreading deep scrubs so they are uniformly distributed over the week"
+                },
+                "desc": {
+                    "before": "deprecated. Has no effect.",
+                    "after": "Scrubs will randomly become deep scrubs at this rate (0.15 -> 15% of scrubs are deep)"
+                }
+            },
+            "osd_shallow_scrub_chunk_min": {
+                "with_legacy": {
+                    "before": false,
+                    "after": true
+                }
+            },
+            "osd_scrub_auto_repair": {
+                "fmt_desc": {
+                    "before": "Setting this to ``true`` will enable automatic PG repair when errors are found by scrubs or deep-scrubs.  However, if more than ``osd_scrub_auto_repair_num_errors`` damaged objects are found a repair is NOT performed.",
+                    "after": "Setting this to ``true`` will enable automatic PG repair when errors are found by scrubs or deep-scrubs.  However, if more than ``osd_scrub_auto_repair_num_errors`` errors are found a repair is NOT performed."
+                }
+            },
+            "osd_scrub_begin_hour": {
+                "fmt_desc": {
+                    "before": "This restricts scrubbing to this hour of the day or later. Use ``osd_scrub_begin_hour = 0`` and ``osd_scrub_end_hour = 0`` to allow scrubbing the entire day.  Along with ``osd_scrub_end_hour`` they define a time window, only in which will periodic scrubs be initiated.",
+                    "after": "This restricts scrubbing to this hour of the day or later. Use ``osd_scrub_begin_hour = 0`` and ``osd_scrub_end_hour = 0`` to allow scrubbing the entire day.  Along with ``osd_scrub_end_hour``, they define a time window, in which the scrubs can happen. But a scrub will be performed no matter whether the time window allows or not, as long as the placement group's scrub interval exceeds ``osd_scrub_max_interval``."
+                }
+            },
+            "osd_scrub_end_week_day": {
+                "fmt_desc": {
+                    "before": "This restricts scrubbing to days of the week earlier than this. 0 = Sunday, 1 = Monday, etc.  Use ``osd_scrub_begin_week_day = 0`` and ``osd_scrub_end_week_day = 0`` to allow scrubbing for the entire week. Along with ``osd_scrub_begin_week_day``, they define a time window, in which periodic scrubs can be automatically initiated.",
+                    "after": "This restricts scrubbing to days of the week earlier than this. 0 = Sunday, 1 = Monday, etc.  Use ``osd_scrub_begin_week_day = 0`` and ``osd_scrub_end_week_day = 0`` to allow scrubbing for the entire week. Along with ``osd_scrub_begin_week_day``, they define a time window, in which the scrubs can happen. But a scrub will be performed no matter whether the time window allows or not, as long as the placement group's scrub interval exceeds ``osd_scrub_max_interval``."
+                }
+            },
+            "osd_scrub_begin_week_day": {
+                "fmt_desc": {
+                    "before": "This restricts scrubbing to this day of the week or later. 0  = Sunday, 1 = Monday, etc. Use ``osd_scrub_begin_week_day = 0`` and ``osd_scrub_end_week_day = 0`` to allow scrubbing for the entire week. Along with ``osd_scrub_end_week_day``, they define a time window in which periodic scrubs can be automatically initiated.",
+                    "after": "This restricts scrubbing to this day of the week or later. 0  = Sunday, 1 = Monday, etc. Use ``osd_scrub_begin_week_day = 0`` and ``osd_scrub_end_week_day = 0`` to allow scrubbing for the entire week. Along with ``osd_scrub_end_week_day``, they define a time window in which scrubs can happen. But a scrub will be performed no matter whether the time window allows or not, when the PG's scrub interval exceeds ``osd_scrub_max_interval``."
+                }
+            },
+            "osd_backfill_scan_max": {
+                "fmt_desc": {
+                    "before": "The maximum number of objects per backfill scan.",
+                    "after": "The maximum number of objects per backfill scan.p"
+                }
+            },
+            "osd_scrub_chunk_min": {
+                "with_legacy": {
+                    "before": false,
+                    "after": true
+                },
+                "fmt_desc": {
+                    "before": "The minimum number of objects to scrub during single operation. Also serves as a minimal chunk size even after scrubbing is preempted by client operations and the effective chunk size is halved.",
+                    "after": "The minimal number of object store chunks to scrub during single operation. Ceph blocks writes to single chunk during scrub."
+                }
+            },
+            "osd_scrub_backoff_ratio": {
+                "long_desc": {
+                    "before": "Probability that a particular OSD tick instance will skip scrub scheduling. 66% means that approximately one of three ticks will cause scrub scheduling.",
+                    "after": "This is the precentage of ticks that do NOT schedule scrubs, 66% means that 1 out of 3 ticks will schedule scrubs"
+                }
+            },
+            "osd_scrub_chunk_max": {
+                "with_legacy": {
+                    "before": false,
+                    "after": true
+                },
+                "fmt_desc": {
+                    "before": "The maximum number of objects to deep-scrub during single internal scrub operation. Large values would improve scrubbing performance but may adversely affect client operations' latency.",
+                    "after": "The maximum number of objects to deep-scrub during single internal scrub operation. Large values would improve scrubbing performance but may adversely affect client operations latency."
+                }
+            },
+            "osd_class_load_list": {
+                "default": {
+                    "before": "cephfs hello journal lock log numops otp rbd refcount rgw rgw_gc timeindex user version cas cmpomap queue 2pc_queue fifo sem_set",
+                    "after": "cephfs hello journal lock log numops otp rbd refcount rgw rgw_gc timeindex user version cas cmpomap queue 2pc_queue fifo"
+                }
+            },
+            "osd_scrub_interval_randomize_ratio": {
+                "long_desc": {
+                    "before": "This prevents a scrub 'stampede' by randomly varying the scrub intervals so that they are uniformly distributed over time.",
+                    "after": "This prevents a scrub 'stampede' by randomly varying the scrub intervals so that they are soon uniformly distributed over the week"
+                }
+            },
+            "osd_scrub_load_threshold": {
+                "fmt_desc": {
+                    "before": "The normalized maximum load. Ceph will not initiate periodic (regular) scrubs when the system load (as defined by ``getloadavg() / number of online CPUs``) is higher than this number. The default is set high enough to allow periodic scrubbing under most load conditions.",
+                    "after": "The normalized maximum load. Ceph will not scrub when the system load (as defined by ``getloadavg() / number of online CPUs``) is higher than this number. Default is ``0.5``."
+                },
+                "default": {
+                    "before": 10.0,
+                    "after": 0.5
+                }
+            }
+        },
+        "mds.yaml.in": {
+            "mds_bal_split_wr": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_log_pause": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                }
+            },
+            "mds_inject_journal_corrupt_dentry_first": {
+                "flags": {
+                    "before": "",
+                    "after": [
+                        "runtime"
+                    ]
+                }
+            },
+            "mds_bal_fragment_dirs": {
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_target_decay": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_split_bits": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_export_pin": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_log_max_events": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                }
+            },
+            "mds_bal_midchunk": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_log_events_per_segment": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "min": {
+                    "before": 1,
+                    "after": ""
+                },
+                "type": {
+                    "before": "uint",
+                    "after": "int"
+                }
+            },
+            "mds_bal_max_until": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_mode": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_min_start": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_unreplicate_threshold": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_idle_threshold": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_need_min": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_split_rd": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_interval": {
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_fragment_fast_factor": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_merge_size": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_log_skip_corrupt_events": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_need_max": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_max": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_split_size": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_log_max_segments": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "min": {
+                    "before": 8,
+                    "after": ""
+                }
+            },
+            "mds_bal_fragment_interval": {
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_min_rebalance": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_minchunk": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_sample_interval": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            },
+            "mds_bal_replicate_threshold": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            }
+        },
+        "rbd-mirror.yaml.in": {
+            "rbd_mirror_image_policy_rebalance_timeout": {
+                "desc": {
+                    "before": "number of seconds policy should be idle before triggering reshuffle (rebalance) of images",
+                    "after": "number of seconds policy should be idle before trigerring reshuffle (rebalance) of images"
+                }
+            }
+        },
+        "crimson.yaml.in": {
+            "crimson_alien_thread_cpu_cores": {
+                "flags": {
+                    "before": [
+                        "startup"
+                    ],
+                    "after": ""
+                }
+            },
+            "crimson_osd_obc_lru_size": {
+                "default": {
+                    "before": 512,
+                    "after": 10
+                }
+            },
+            "seastore_max_concurrent_transactions": {
+                "desc": {
+                    "before": "maximum concurrent transactions that seastore allows (per reactor)",
+                    "after": "maximum concurrent transactions that seastore allows"
+                },
+                "default": {
+                    "before": 128,
+                    "after": 8
+                }
+            },
+            "seastore_cache_lru_size": {
+                "desc": {
+                    "before": "Size in bytes of extents to keep in cache (per reactor).",
+                    "after": "Size in bytes of extents to keep in cache."
+                },
+                "default": {
+                    "before": "2_G",
+                    "after": "64_M"
+                }
+            }
+        },
+        "global.yaml.in": {
+            "mon_keyvaluedb": {
+                "enum_values": {
+                    "before": [
+                        "rocksdb"
+                    ],
+                    "after": [
+                        "leveldb",
+                        "rocksdb"
+                    ]
+                }
+            },
+            "bdev_async_discard_max_pending": {
+                "see_also": {
+                    "before": [
+                        "bdev_async_discard_threads"
+                    ],
+                    "after": [
+                        "bdev_enable_discard"
+                    ]
+                }
+            },
+            "osd_pool_default_erasure_code_profile": {
+                "default": {
+                    "before": "plugin=isa technique=reed_sol_van k=2 m=2",
+                    "after": "plugin=jerasure technique=reed_sol_van k=2 m=2"
+                }
+            },
+            "bluestore_allocator": {
+                "enum_values": {
+                    "before": [
+                        "bitmap",
+                        "stupid",
+                        "avl",
+                        "btree",
+                        "hybrid",
+                        "hybrid_btree2"
+                    ],
+                    "after": [
+                        "bitmap",
+                        "stupid",
+                        "avl",
+                        "btree",
+                        "hybrid",
+                        "zoned",
+                        "hybrid_btree2"
+                    ]
+                }
+            },
+            "osd_requested_scrub_priority": {
+                "with_legacy": {
+                    "before": false,
+                    "after": true
+                },
+                "fmt_desc": {
+                    "before": "deprecated.  Use ``osd_scrub_priority`` instead.",
+                    "after": "The priority set for user requested scrub on the work queue.  If this value were to be smaller than ``osd_client_op_priority`` it can be boosted to the value of ``osd_client_op_priority`` when scrub is blocking client operations."
+                }
+            },
+            "bdev_type": {
+                "enum_values": {
+                    "before": [
+                        "aio",
+                        "spdk",
+                        "pmem"
+                    ],
+                    "after": [
+                        "aio",
+                        "spdk",
+                        "pmem",
+                        "hm_smr"
+                    ]
+                }
+            },
+            "ms_tcp_prefetch_max_size": {
+                "default": {
+                    "before": "64_K",
+                    "after": "4_K"
+                }
+            },
+            "bluefs_check_volume_selector_often": {
+                "see_also": {
+                    "before": [
+                        "bluefs_check_volume_selector_on_mount"
+                    ],
+                    "after": [
+                        "bluefs_check_volume_selector_on_umount"
+                    ]
+                }
+            },
+            "bluestore_rocksdb_cf": {
+                "verbatim": {
+                    "before": "#ifdef WITH_CRIMSON\n// This is necessary as the Seastar's allocator imposes restrictions\n// on the number of threads that entered malloc/free/*. Unfortunately,\n// RocksDB sharding in BlueStore dramatically lifted the number of\n// threads spawn during RocksDB's init.\n.set_validator([](std::string *value, std::string *error_message) {\n  if (const bool parsed_value = strict_strtob(value->c_str(), error_message);\n    error_message->empty() && parsed_value) {\n    *error_message = \"invalid BlueStore sharding configuration.\"\n                     \" Be aware any change takes effect only on mkfs!\";\n    return -EINVAL;\n  } else {\n    return 0;\n  }\n})\n#endif\n",
+                    "after": "#ifdef WITH_SEASTAR\n// This is necessary as the Seastar's allocator imposes restrictions\n// on the number of threads that entered malloc/free/*. Unfortunately,\n// RocksDB sharding in BlueStore dramatically lifted the number of\n// threads spawn during RocksDB's init.\n.set_validator([](std::string *value, std::string *error_message) {\n  if (const bool parsed_value = strict_strtob(value->c_str(), error_message);\n    error_message->empty() && parsed_value) {\n    *error_message = \"invalid BlueStore sharding configuration.\"\n                     \" Be aware any change takes effect only on mkfs!\";\n    return -EINVAL;\n  } else {\n    return 0;\n  }\n})\n#endif\n"
+                }
+            }
+        },
+        "rbd.yaml.in": {
+            "rbd_blocklist_expire_seconds": {
+                "see_also": {
+                    "before": [
+                        "mon_osd_blocklist_default_expire"
+                    ],
+                    "after": ""
+                }
+            }
+        },
+        "mds-client.yaml.in": {
+            "client_permissions": {
+                "with_legacy": {
+                    "before": "",
+                    "after": true
+                },
+                "flags": {
+                    "before": [
+                        "runtime"
+                    ],
+                    "after": ""
+                }
+            }
+        },
+        "rgw.yaml.in": {
+            "rgw_luarocks_location": {
+                "default": {
+                    "before": "/tmp/rgw_luarocks/$name",
+                    "after": "@rgw_luarocks_location@"
+                }
+            },
+            "rgw_s3_auth_order": {
+                "desc": {
+                    "before": "Authentication strategy order to use for S3",
+                    "after": "Authentication strategy order to use for s3 authentication"
+                },
+                "long_desc": {
+                    "before": "The order of authentication strategies to try for S3 authentication. The value is a comma-separated list of engines, external and local. The default order is to try all configured external engines before attempting local RADOS based authentication",
+                    "after": "Order of authentication strategies to try for s3 authentication, the allowed options are a comma separated list of engines external, local. The default order is to try all the externally configured engines before attempting local rados based authentication"
+                }
+            },
+            "rgw_filter": {
+                "enum_values": {
+                    "before": [
+                        "none",
+                        "base",
+                        "d4n",
+                        "posix"
+                    ],
+                    "after": [
+                        "none",
+                        "base",
+                        "trace"
+                    ]
+                },
+                "long_desc": {
+                    "before": "defaults to none. Other valid values are base and d4n (both experimental).",
+                    "after": "defaults to none. Other valid values are base and trace (both experimental)."
+                }
+            },
+            "rgw_s3_auth_use_rados": {
+                "desc": {
+                    "before": "Specify whether S3 authentication uses credentials stored in RADOS",
+                    "after": "Should S3 authentication use credentials stored in RADOS backend."
+                }
+            },
+            "rgw_enable_gc_threads": {
+                "see_also": {
+                    "before": [
+                        "rgw_enable_quota_threads",
+                        "rgw_enable_lc_threads",
+                        "rgw_enable_restore_threads"
+                    ],
+                    "after": [
+                        "rgw_enable_quota_threads",
+                        "rgw_enable_lc_threads"
+                    ]
+                }
+            },
+            "rgw_numa_node": {
+                "desc": {
+                    "before": "set the RGW daemon'ss CPU affinity to a NUMA node (-1 for none)",
+                    "after": "set rgw's cpu affinity to a numa node (-1 for none)"
+                }
+            },
+            "rgw_enable_apis": {
+                "desc": {
+                    "before": "A list of RESTful APIs for RGW to enable",
+                    "after": "A list of set of RESTful APIs that rgw handles."
+                },
+                "fmt_desc": {
+                    "before": "Enables the specified APIs.\n\n  .. note:: Enabling the ``S3`` API is a requirement for\n            any ``radosgw`` instance that is meant to\n            participate in a `multi-site <../multisite>`_\n            configuration.\n",
+                    "after": "Enables the specified APIs.\n\n  .. note:: Enabling the ``s3`` API is a requirement for\n            any ``radosgw`` instance that is meant to\n            participate in a `multi-site <../multisite>`_\n            configuration.\n"
+                }
+            },
+            "rgw_admin_entry": {
+                "long_desc": {
+                    "before": "Note that multisite replication requires the value admin, so this option must be left at the default in such deployments.",
+                    "after": ""
+                }
+            },
+            "rgw_max_put_size": {
+                "long_desc": {
+                    "before": "Plain object upload is capped at this amount of data. In order to upload larger objects, a special composite upload mechanism is required multi-part upload (MPU) for S3 and DLO and SLO for Swift.  Note that this value also limits the size of individual chunks uploaded for MPU and DLO/SLO objects, thus the larget composite object that can be uploaded is of size ``rgw_max_put_size`` * ``rgw_multipart_part_upload_limit``",
+                    "after": "Plain object upload is capped at this amount of data. In order to upload larger objects, a special upload mechanism is required. The S3 API provides the multi-part upload, and Swift provides DLO and SLO."
+                }
+            },
+            "rgw_cache_lru_size": {
+                "default": {
+                    "before": 25000,
+                    "after": 10000
+                }
+            },
+            "rgw_max_chunk_size": {
+                "long_desc": {
+                    "before": "The chunk size is the size of requests that RGW sends to OSDs when accessing RADOS objects. RGW read and write operations will never request more than this amount in a single request. This also defines the RGW HEAD object size, as head operations need to be atomic, and anything larger than this would require more than a single operation. When RGW objects are written to the default storage class, up to this amount of payload data will be stored alongside metadata in the head object.  Note that when writing an RGW object to a non-default storage class the HEAD RADOS object is always stored in the default storage class' pool but no inlining of payload data is performed.",
+                    "after": "The chunk size is the size of RADOS I/O requests that RGW sends when accessing data objects. RGW read and write operations will never request more than this amount in a single request. This also defines the RGW head object size, as head operations need to be atomic, and anything larger than this would require more than a single operation. When RGW objects are written to the default storage class, up to this amount of payload data will be stored alongside metadata in the head object."
+                }
+            },
+            "rgw_enable_static_website": {
+                "long_desc": {
+                    "before": "This configurable controls whether RGW enables the website control APIs. RGW can serve static websites if S3 website hostnames are configured.",
+                    "after": "This configurable controls whether RGW handles the website control APIs. RGW can server static websites if s3website hostnames are configured, and unrelated to this configurable."
+                }
+            },
+            "rgw_max_listing_results": {
+                "long_desc": {
+                    "before": "This caps the maximum permitted value for listing-like operations in RGW S3. Affects ListObjects(max-keys), ListObjectsVersions(max-keys), ListMultipartUploads(max-uploads), ListParts(max-parts)",
+                    "after": "This caps the maximum permitted value for listing-like operations in RGW S3. Affects ListBucket(max-keys), ListBucketVersions(max-keys), ListBucketMultipartUploads(max-uploads), ListMultipartUploadParts(max-parts)"
+                },
+                "desc": {
+                    "before": "Upper bound on results in listing operations, ListObjects max-keys",
+                    "after": "Upper bound on results in listing operations, ListBucket max-keys"
+                },
+                "default": {
+                    "before": 5000,
+                    "after": 1000
+                }
+            },
+            "rgw_sts_min_session_duration": {
+                "see_also": {
+                    "before": [
+                        "rgw_sts_max_session_duration"
+                    ],
+                    "after": ""
+                },
+                "long_desc": {
+                    "before": "This option can be used to configure the lower limit of durationSeconds of temporary credentials returned by 'AssumeRole*' calls.",
+                    "after": ""
+                }
+            },
+            "rgw_enable_quota_threads": {
+                "see_also": {
+                    "before": [
+                        "rgw_enable_gc_threads",
+                        "rgw_enable_lc_threads",
+                        "rgw_enable_restore_threads"
+                    ],
+                    "after": [
+                        "rgw_enable_gc_threads",
+                        "rgw_enable_lc_threads"
+                    ]
+                }
+            },
+            "rgw_crypt_sse_s3_key_template": {
+                "desc": {
+                    "before": "template for per-bucket SSE-S3 keys in Vault.",
+                    "after": "template for per-bucket sse-s3 keys in vault."
+                }
+            },
+            "rgw_s3_auth_use_keystone": {
+                "desc": {
+                    "before": "Specify whether S3 authentication uses Keystone",
+                    "after": "Should S3 authentication use Keystone."
+                }
+            },
+            "rgw_num_control_oids": {
+                "see_also": {
+                    "before": [
+                        "rgw_cache_enabled",
+                        "rgw_max_control_aio"
+                    ],
+                    "after": ""
+                }
+            },
+            "rgw_keystone_implicit_tenants": {
+                "long_desc": {
+                    "before": "Implicitly create new users in their own tenant with the same name when authenticating via Keystone.  Can be limited to S3 or SWIFT only.",
+                    "after": "Implicitly create new users in their own tenant with the same name when authenticating via Keystone.  Can be limited to s3 or swift only."
+                }
+            },
+            "rgw_sts_max_session_duration": {
+                "see_also": {
+                    "before": [
+                        "rgw_sts_min_session_duration"
+                    ],
+                    "after": ""
+                },
+                "long_desc": {
+                    "before": "This option can be used to configure the upper limit of the durationSeconds of temporary credentials returned by 'GetSessionToken'.",
+                    "after": "Max duration in seconds for which the session token is valid."
+                }
+            },
+            "rgw_enable_lc_threads": {
+                "see_also": {
+                    "before": [
+                        "rgw_enable_gc_threads",
+                        "rgw_enable_quota_threads",
+                        "rgw_enable_restore_threads"
+                    ],
+                    "after": [
+                        "rgw_enable_gc_threads",
+                        "rgw_enable_quota_threads"
+                    ]
+                },
+                "desc": {
+                    "before": "Enables the lifecycle maintenance thread. This is required on at least one RGW daemon for each zone.",
+                    "after": "Enables the lifecycle maintenance thread. This is required on at least one rgw for each zone."
+                }
+            }
+        },
+        "mgr.yaml.in": {
+            "mgr_initial_modules": {
+                "default": {
+                    "before": "iostat nfs",
+                    "after": "restful iostat nfs"
+                }
+            }
+        }
+    }
+}

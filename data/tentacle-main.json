@@ -1,0 +1,2874 @@
+{
+    "added": {
+        "crimson.yaml.in": [
+            "seastore_cold_tier_generations",
+            "crimson_bluestore_cpu_set",
+            "seastore_cachepin_2q_in_ratio",
+            "seastore_hot_tier_generations",
+            "crimson_bluestore_num_threads",
+            "seastore_cachepin_size_pershard",
+            "seastore_cachepin_2q_out_ratio",
+            "seastore_segment_cleaner_gc_formula",
+            "seastore_cachepin_type",
+            "crimson_reactor_backend",
+            "crimson_cpu_set",
+            "crimson_cpu_num",
+            "crimson_poll_mode",
+            "crimson_allow_pg_split"
+        ],
+        "mgr.yaml.in": [
+            "mgr_test_metadata_error",
+            "mgr_osd_upgrade_check_convergence_factor"
+        ],
+        "global.yaml.in": [
+            "openssl_conf",
+            "bluestore_discard_on_mkfs",
+            "bdev_max_discard_length",
+            "breakpad",
+            "bdev_debug_discard_sleep",
+            "bdev_discard_max_bytes"
+        ],
+        "cephfs-mirror.yaml.in": [
+            "cephfs_mirror_blockdiff_min_file_size",
+            "cephfs_mirror_max_datasync_threads"
+        ],
+        "mon.yaml.in": [
+            "mon_netsplit_grace_period",
+            "mon_down_added_grace"
+        ],
+        "mds-client.yaml.in": [
+            "client_fscrypt_dummy_encryption",
+            "client_respect_subvolume_snapshot_visibility",
+            "client_inject_write_delay_secs",
+            "client_fscrypt_as"
+        ],
+        "mds.yaml.in": [
+            "mds_use_global_snaprealm_seq_for_subvol",
+            "subv_metrics_window_interval"
+        ],
+        "rgw.yaml.in": [
+            "rgw_ratelimit_interval",
+            "rgw_http_notif_connection_timeout",
+            "rgw_keystone_scope_include_roles",
+            "rgw_bucket_persistent_notif_num_shards",
+            "rgw_keystone_token_cache_ttl",
+            "rgw_lc_ordered_list_threshold",
+            "rgw_keystone_scope_enabled",
+            "rgw_bucket_eexist_override",
+            "rgw_d4n_l1_datacache_disk_reserve",
+            "rgw_inject_delay_pattern",
+            "rgw_dedup_min_obj_size_for_dedup",
+            "rgw_posix_userdb_dir",
+            "rgw_keystone_scope_include_user",
+            "rgw_http_notif_max_inflight",
+            "rgw_inject_delay_sec",
+            "rgw_usage_log_key_transition",
+            "rgw_http_notif_message_timeout",
+            "rgw_redis_connection_pool_size",
+            "rgw_d4n_local_rgw_address",
+            "rgw_lc_list_cnt",
+            "rgw_read_through_timeout_ms"
+        ]
+    },
+    "deleted": {
+        "crimson.yaml.in": [
+            "crimson_seastar_num_threads",
+            "crimson_osd_objectstore",
+            "crimson_alien_thread_cpu_cores",
+            "crimson_alien_op_num_threads",
+            "crimson_seastar_cpu_cores",
+            "seastore_obj_data_write_amplification",
+            "seastore_cache_lru_size"
+        ],
+        "global.yaml.in": [
+            "kstore_rocksdb_options",
+            "kstore_default_stripe_size",
+            "openssl_engine_opts",
+            "kstore_nid_prealloc",
+            "kstore_max_ops",
+            "kstore_onode_map_size",
+            "kstore_fsck_on_mount",
+            "kstore_fsck_on_mount_deep",
+            "kstore_sync_transaction",
+            "kstore_sync_submit_transaction",
+            "kstore_max_bytes",
+            "kstore_backend"
+        ],
+        "rgw.yaml.in": [
+            "rgw_d4n_l1_datacache_size",
+            "rgw_keystone_admin_token",
+            "rgw_keystone_admin_token_path"
+        ]
+    },
+    "modified": {
+        "mgr.yaml.in": {
+            "mon_target_pg_per_osd": {
+                "long_desc": {
+                    "before": "When creating pools, the automated PG management logic will attempt to reach this target.  In some circumstances, it may exceed this target, up to the ``mon_max_pg_per_osd`` limit. Conversely, a lower number of PGs per OSD may be created if the cluster is not yet fully utilised",
+                    "after": "The placement group (PG) autoscaler will arrange for approximately this number of PG replicas on each OSD as shown by the PGS column of a ``ceph osd df`` report. In some circumstances it may exceed this target, up to the ``mon_max_pg_per_osd`` limit. Conversely, a lower number of PGs per OSD may be set if the cluster is not yet fully utilized or when the sum of power-of-two per-pool ``pg_num`` values does not permit a perfect fit."
+                },
+                "desc": {
+                    "before": "Automated PG management creates this many PGs per OSD",
+                    "after": "Target number of PG replicas per OSD"
+                }
+            }
+        },
+        "global.yaml.in": {
+            "log_to_graylog": {
+                "desc": {
+                    "before": "send log lines to remote graylog server",
+                    "after": "Send log lines to remote Graylog server"
+                }
+            },
+            "bluestore_cache_kv_onode_ratio": {
+                "desc": {
+                    "before": "Ratio of bluestore cache to devote to kv onode column family (rocksdb)",
+                    "after": "Ratio of BlueStore cache to devote to key/value onode column family (rocksdb)"
+                }
+            },
+            "mon_host_override": {
+                "fmt_desc": {
+                    "before": "This is the list of monitors that the Ceph process **initially** contacts when first establishing communication with the Ceph cluster. This overrides the known monitor list that is derived from MonMap updates sent to older Ceph instances (like librados cluster handles). This option is expected to be useful primarily for debugging.",
+                    "after": "This is the list of Monitors that the Ceph process **initially** contacts when first establishing communication with the Ceph cluster. This overrides the known monitor list that is derived from MonMap updates sent to older Ceph instances (like librados cluster handles). This option is expected to be useful primarily for debugging."
+                },
+                "desc": {
+                    "before": "monitor(s) to use overriding the MonMap",
+                    "after": "Monitor(s) to use overriding the MonMap"
+                }
+            },
+            "mon_warn_on_insecure_global_id_reclaim": {
+                "desc": {
+                    "before": "issue AUTH_INSECURE_GLOBAL_ID_RECLAIM health warning if any connected clients are insecurely reclaiming global_id",
+                    "after": "Raise the AUTH_INSECURE_GLOBAL_ID_RECLAIM health warning if any connected clients are insecurely reclaiming global_ids"
+                }
+            },
+            "rocksdb_bloom_bits_per_key": {
+                "long_desc": {
+                    "before": "RocksDB bloom filters can be used to quickly answer the question of whether or not a key may exist or definitely does not exist in a given RocksDB SST file without having to read all keys into memory.  Using a higher bit value decreases the likelihood of false positives at the expense of additional disk space and memory consumption when the filter is loaded into RAM.  The current default value of 20 was found to provide significant performance gains when getattr calls are made (such as during new object creation in bluestore) without significant memory overhead or cache pollution when combined with rocksdb partitioned index filters.  See: https://github.com/facebook/rocksdb/wiki/Partitioned-Index-Filters for more information.",
+                    "after": "RocksDB bloom filters can be used to quickly answer the question of whether or not a key may exist or definitely does not exist in a given RocksDB SST file without having to read all keys into memory.  Using a higher bit value decreases the likelihood of false positives at the expense of additional disk space and memory consumption when the filter is loaded into RAM.  The current default value of 20 was found to provide significant performance gains when getattr calls are made (such as during new object creation in BlueStore) without significant memory overhead or cache pollution when combined with rocksdb partitioned index filters.  See: https://github.com/facebook/rocksdb/wiki/Partitioned-Index-Filters for more information."
+                }
+            },
+            "mon_sync_max_payload_size": {
+                "desc": {
+                    "before": "target max message payload for mon sync",
+                    "after": "Target max message payload for mon sync"
+                }
+            },
+            "bluestore_slow_ops_warn_lifetime": {
+                "desc": {
+                    "before": "Set the time period during which a BlueStore slow ops warning will be raised when the `bluestore_slow_ops_warn_threshold` is exceeded.  This is not the same as `osd_op_complaint_time`, which is about RADOS ops at the OSD level.",
+                    "after": "Set the duration after which BlueStore slow ops warnings clear after being raised by exceeding the `bluestore_slow_ops_warn_threshold`.  This is not the same as `osd_op_complaint_time`, which is about RADOS ops at the OSD level."
+                }
+            },
+            "osd_pool_default_type": {
+                "desc": {
+                    "before": "default type of pool to create",
+                    "after": "Default data protection strategy type when creating a new pool"
+                }
+            },
+            "mon_max_snap_prune_per_epoch": {
+                "desc": {
+                    "before": "max number of pruned snaps we will process in a single OSDMap epoch",
+                    "after": "Max number of pruned snaps we will process in a single OSDMap epoch"
+                }
+            },
+            "mon_max_mgrmap_epochs": {
+                "desc": {
+                    "before": "max number of MgrMaps to store",
+                    "after": "Max number of MgrMaps to store"
+                }
+            },
+            "filestore_xfs_extsize": {
+                "desc": {
+                    "before": "Use XFS extsize ioctl(2) to hint allocator about expected write sizes",
+                    "after": "Use XFS extsize ioctl(2) to hint allocator about expected write sizes (deprecated)"
+                }
+            },
+            "filestore_debug_inject_read_err": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_min_alloc_size": {
+                "long_desc": {
+                    "before": "A smaller allocation size generally means less data is read and then rewritten when a copy-on-write operation is triggered (e.g., when writing to something that was recently snapshotted).  Similarly, less data is journaled before performing an overwrite (writes smaller than min_alloc_size must first pass through the BlueStore journal).  Larger values of min_alloc_size reduce the amount of metadata required to describe the on-disk layout and reduce overall fragmentation.",
+                    "after": "A smaller allocation size generally means less data is read and then rewritten when a copy-on-write operation is triggered (e.g., when writing to something that was recently snapshotted).  Similarly, less data is journaled before performing an overwrite (writes smaller than min_alloc_size must first pass through the BlueStore WAL).  Larger values of min_alloc_size reduce the amount of metadata required to describe the on-disk layout and reduce overall fragmentation. Setting to 0 directs that the effective value is taken from bluestore_min_alloc_size_hdd or bluestore_min_alloc_size_ssd according to the kernel's rotational attribute for the underlying device. Note that this is baked into each OSD at creation. An OSD must be rebuilt to use a different value."
+                }
+            },
+            "bluestore_use_optimal_io_size_for_min_alloc_size": {
+                "desc": {
+                    "before": "Discover media optimal IO Size and use for min_alloc_size",
+                    "after": "Discover media optimal IO size and use for min_alloc_size. This is useful when OSDs are created on coarse-IU QLC SSDs or other novel types of underlyinng block device. It is a no-op for conventional media."
+                }
+            },
+            "filestore_op_thread_timeout": {
+                "desc": {
+                    "before": "Seconds before a worker thread is considered stalled",
+                    "after": "Seconds before a worker thread is considered stalled (deprecated)"
+                }
+            },
+            "mon_sync_debug": {
+                "desc": {
+                    "before": "enable extra debugging during mon sync",
+                    "after": "Enable extra debugging during mon sync"
+                }
+            },
+            "filestore_split_rand_factor": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_fail_eio": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "rados_replica_read_policy": {
+                "fmt_desc": {
+                    "before": "Policy for determining which OSD will receive read operations.\nIf set to ``default``, each PG's primary OSD will always be used\nfor read operations. If set to ``balance``, read operations will\nbe sent to a randomly selected OSD within the replica set. If set\nto ``localize``, read operations will be sent to the closest OSD\nas determined by the CRUSH map.\n",
+                    "after": "Policy for determining which OSD in a PG acting set will receive read operations.\nIf set to ``default``, each PG's primary OSD will always be used\nfor read operations. If set to ``balance``, read operations will\nbe sent to a randomly selected OSD within the replica set. If set\nto ``localize``, read operations will be sent to the closest OSD\nas determined by the CRUSH map.\n"
+                },
+                "desc": {
+                    "before": "read policy for sending read requests to OSD",
+                    "after": "Read policy for sending read requests to OSD"
+                }
+            },
+            "filestore_max_inline_xattrs_btrfs": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "osd_pool_default_erasure_code_profile": {
+                "desc": {
+                    "before": "default erasure code profile for new erasure-coded pools",
+                    "after": "Default EC profile for new erasure-coded pools"
+                }
+            },
+            "mgr_enable_op_tracker": {
+                "desc": {
+                    "before": "Enable / disable MGR Op Tracker",
+                    "after": "Enable / disable the Manager op tracker"
+                }
+            },
+            "filestore_max_xattr_value_size_other": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_dump_file": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "osd_max_pg_log_entries": {
+                "desc": {
+                    "before": "maximum number of entries to maintain in the PG log",
+                    "after": "Maximum number of entries to maintain in the PG log"
+                }
+            },
+            "rados_osd_op_timeout": {
+                "desc": {
+                    "before": "timeout for operations handled by osds such as write (0 is unlimited)",
+                    "after": "Timeout for operations handled by OSDs, for example write(). (0 is unlimited)"
+                }
+            },
+            "filestore_max_alloc_hint_size": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "log_to_journald": {
+                "desc": {
+                    "before": "send log lines to journald",
+                    "after": "Send log lines to journald"
+                }
+            },
+            "bluestore_throttle_trace_rate": {
+                "desc": {
+                    "before": "Rate at which to sample bluestore transactions (per second)",
+                    "after": "Rate at which to sample BlueStore transactions (per second)"
+                }
+            },
+            "mon_client_ping_interval": {
+                "fmt_desc": {
+                    "before": "The client will ping the monitor every ``N`` seconds.",
+                    "after": "The client will ping the Monitors every this many seconds."
+                }
+            },
+            "bluestore_elastic_shared_blobs": {
+                "long_desc": {
+                    "before": "Overwrites on snapped objects cause shared blob count to grow. It has a very negative performance effect. When enabled shared blob count is significantly reduced.",
+                    "after": "Overwrites on snapped objects cause the shared blob count to grow. This has a very negative performance effect. When enabled, the shared blob count is significantly reduced."
+                },
+                "desc": {
+                    "before": "Let bluestore to reuse existing shared blobs if possible",
+                    "after": "Let BlueStore reuse existing shared blobs if possible"
+                }
+            },
+            "gss_target_name": {
+                "long_desc": {
+                    "before": "This sets the gss target service name.",
+                    "after": "This sets the GSS target service name."
+                }
+            },
+            "mon_host": {
+                "desc": {
+                    "before": "list of hosts or addresses to search for a monitor",
+                    "after": "List of hosts or addresses to search for a monitor"
+                }
+            },
+            "filestore_wbthrottle_btrfs_bytes_hard_limit": {
+                "desc": {
+                    "before": "Block writes when this many bytes haven't been flushed (fsynced) (btrfs)",
+                    "after": "Block writes when this many bytes haven't been flushed (fsynced) (btrfs, deprecated)"
+                }
+            },
+            "no_config_file": {
+                "long_desc": {
+                    "before": "When specified, we won't be looking for a configuration file, and will instead expect that whatever options or values are required for us to work will be passed as arguments.",
+                    "after": "When specified, we won't look for a configuration file, and will instead expect that whatever options or values are required for us to work will be passed as arguments."
+                },
+                "desc": {
+                    "before": "signal that we don't require a config file to be present",
+                    "after": "Signal that we don't require a config file to be present"
+                }
+            },
+            "filestore_kill_at": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_op_thread_suicide_timeout": {
+                "desc": {
+                    "before": "Seconds before a worker thread is considered dead",
+                    "after": "Seconds before a worker thread is considered dead (deprecated)"
+                }
+            },
+            "filestore_merge_threshold": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "public_addrv": {
+                "desc": {
+                    "before": "public-facing address to bind to",
+                    "after": "Public-facing addresses to which services are to bind"
+                }
+            },
+            "mgr_ttl_cache_expire_seconds": {
+                "desc": {
+                    "before": "Set the time to live in seconds - set to 0 to disable the cache.",
+                    "after": "Set the Manager cache time to live in seconds; set to 0 to disable the cache."
+                }
+            },
+            "filestore_max_xattr_value_size": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_cache_meta_ratio": {
+                "desc": {
+                    "before": "Ratio of bluestore cache to devote to metadata",
+                    "after": "Ratio of BlueStore cache to devote to metadata"
+                }
+            },
+            "mgr_connect_retry_interval": {
+                "desc": {
+                    "before": "",
+                    "after": "Manager reconnect retry interval"
+                }
+            },
+            "mon_sync_provider_kill_at": {
+                "desc": {
+                    "before": "kill mon sync requester at specific point",
+                    "after": "Kill mon sync provider at specific point"
+                }
+            },
+            "filestore_wbthrottle_xfs_inodes_hard_limit": {
+                "desc": {
+                    "before": "Block writing when this many inodes have outstanding writes (xfs)",
+                    "after": "Block writing when this many inodes have outstanding writes (xfs, deprecated)"
+                }
+            },
+            "filestore_wbthrottle_btrfs_ios_start_flusher": {
+                "desc": {
+                    "before": "Start flushing (fsyncing) when this many IOs are written (brtrfs)",
+                    "after": "Start flushing (fsyncing) when this many IOs are written (brtrfs, deprecated)"
+                }
+            },
+            "filestore_sloppy_crc_block_size": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_omap_header_cache_size": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "mon_debug_no_require_tentacle": {
+                "desc": {
+                    "before": "do not set tentacle feature for new mon clusters",
+                    "after": "Do not require the Tentacle feature for new Monitor clusters"
+                }
+            },
+            "osd_calc_pg_upmaps_aggressively": {
+                "desc": {
+                    "before": "try to calculate PG upmaps more aggressively, e.g., by doing a fairly exhaustive search of existing PGs that can be unmapped or upmapped",
+                    "after": "Try to calculate PG upmaps more aggressively, e.g., by doing a fairly exhaustive search of existing PGs that can be unmapped or upmapped"
+                }
+            },
+            "filestore_blackhole": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "osd_pool_default_flag_nosizechange": {
+                "desc": {
+                    "before": "set nosizechange flag on new pools",
+                    "after": "Set the nosizechange flag on new pools"
+                }
+            },
+            "bluestore_fsck_shared_blob_tracker_size": {
+                "desc": {
+                    "before": "Size(a fraction of osd_memory_target, defaults to 128MB) of a hash table to track shared blobs ref counts. Higher the size, more precise is the tracker -> less overhead during the repair.",
+                    "after": "Size  (a fraction of osd_memory_target, defaults to 128MB) of a hash table that tracks shared blob ref counts. A higher value makes the the tracker more precise and reduces overhead during repairs."
+                }
+            },
+            "bluestore_volume_selection_reserved": {
+                "desc": {
+                    "before": "Space reserved at DB device and not allowed for 'use some extra' policy usage. Overrides 'bluestore_volume_selection_reserved_factor' setting and introduces straightforward limit.",
+                    "after": "Space reserved on the DB device and not allowed for 'use some extra' policy usage. Overrides the 'bluestore_volume_selection_reserved_factor' setting and introduces a straightforward limit."
+                }
+            },
+            "filestore_wbthrottle_xfs_bytes_hard_limit": {
+                "desc": {
+                    "before": "Block writes when this many bytes haven't been flushed (fsynced) (xfs)",
+                    "after": "Block writes when this many bytes haven't been flushed (fsynced) (xfs, deprecated)"
+                }
+            },
+            "cephsqlite_lock_renewal_interval": {
+                "desc": {
+                    "before": "number of milliseconds before lock is renewed",
+                    "after": "Number of milliseconds before a cephsqlite lock is renewed"
+                }
+            },
+            "bluestore_log_collection_list_age": {
+                "desc": {
+                    "before": "log collection list operation if it's slower than this age (seconds)",
+                    "after": "Log a collection list operation if it is slower than this age (seconds)"
+                }
+            },
+            "filestore_seek_data_hole": {
+                "desc": {
+                    "before": "Use lseek(2) SEEK_HOLE and SEEK_DATA to determine which parts of objects are sparse",
+                    "after": "Use lseek(2) SEEK_HOLE and SEEK_DATA to determine which parts of objects are sparse (deprecated)"
+                }
+            },
+            "bdev_stalled_read_warn_threshold": {
+                "desc": {
+                    "before": "A configurable number for stalled read warning to be appeared if number of stalled read occurence pass `bdev_stalled_read_warn_threshold` in `bdev_stalled_read_warn_lifetime` seconds",
+                    "after": "A configurable number for stalled read warnings to be raised if the number of stalled reads passes the `bdev_stalled_read_warn_threshold` in `bdev_stalled_read_warn_lifetime` seconds"
+                }
+            },
+            "filestore_split_multiple": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_allocator": {
+                "long_desc": {
+                    "before": "Allocator to use for bluestore.  Stupid should only be used for testing.",
+                    "after": "Allocator to use for BlueStore.  Stupid should only be used for testing."
+                }
+            },
+            "osd_memory_expected_fragmentation": {
+                "fmt_desc": {
+                    "before": "When TCMalloc and cache autotuning is enabled, estimate the percentage of memory fragmentation.  This is used to help the autotuner estimate the expected aggregate memory consumption of the caches.",
+                    "after": "When TCMalloc and cache autotuning are enabled, estimate the percentage of memory fragmentation.  This is used to help the autotuner estimate the expected aggregate memory consumption of the caches."
+                },
+                "desc": {
+                    "before": "When tcmalloc and cache autotuning is enabled, estimate the percent of memory fragmentation.",
+                    "after": "When TCMalloc and cache autotuning are enabled, estimate the percent of memory fragmentation."
+                }
+            },
+            "bluestore_throttle_cost_per_io_ssd": {
+                "desc": {
+                    "before": "Default bluestore_throttle_cost_per_io for non-rotation (solid state) media",
+                    "after": "Default bluestore_throttle_cost_per_io for non-rotation (SSD) media"
+                }
+            },
+            "mon_client_hunt_on_resend": {
+                "fmt_desc": {
+                    "before": "On commands connection failure, hunt for any monitor. If false, try to resend the command to the same monitor to prevent command race conditions.",
+                    "after": "On commands connection failure, hunt for any Monitor. If false, try to resend the command to the same Monitor to prevent command race conditions."
+                }
+            },
+            "filestore_debug_verify_split": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_index_retry_probability": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_deferred_batch_ops_ssd": {
+                "desc": {
+                    "before": "Default bluestore_deferred_batch_ops for non-rotational (solid state) media",
+                    "after": "Default bluestore_deferred_batch_ops for non-rotational (SSD) media"
+                }
+            },
+            "osd_fast_shutdown_timeout": {
+                "desc": {
+                    "before": "timeout in seconds for osd fast-shutdown (0 is unlimited)",
+                    "after": "Timeout in seconds for osd fast-shutdown (0 is unlimited)"
+                }
+            },
+            "journal_throttle_high_multiple": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "osd_memory_cache_resize_interval": {
+                "desc": {
+                    "before": "When tcmalloc and cache autotuning is enabled, wait this many seconds between resizing caches.",
+                    "after": "When TCMalloc and cache autotuning are enabled, wait this many seconds between resizing caches."
+                }
+            },
+            "filestore_max_inline_xattr_size_btrfs": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "cephsqlite_lock_renewal_timeout": {
+                "desc": {
+                    "before": "number of milliseconds before transaction lock times out",
+                    "after": "Number of milliseconds before a libcephsqlite transaction lock times out"
+                }
+            },
+            "bluestore_bluefs": {
+                "long_desc": {
+                    "before": "BlueFS allows rocksdb to share the same physical device(s) as the rest of BlueStore.  It should be used in all cases unless testing/developing an alternative metadata database for BlueStore.",
+                    "after": "BlueFS allows RocksDB to share the same physical device(s) as the rest of BlueStore.  It should be used in all cases unless testing/developing an alternative metadata database."
+                },
+                "desc": {
+                    "before": "Use BlueFS to back rocksdb",
+                    "after": "Use BlueFS to back RocksDB"
+                }
+            },
+            "bluestore_rocksdb_cf": {
+                "desc": {
+                    "before": "Enable use of rocksdb column families for bluestore metadata",
+                    "after": "Enable use of RocksDB column families for BlueStore metadata"
+                }
+            },
+            "mon_client_directed_command_retry": {
+                "desc": {
+                    "before": "Number of times to try sending a command directed at a specific monitor",
+                    "after": "Number of times to try sending a command directed at a specific Monitor"
+                }
+            },
+            "bluestore_bluefs_env_mirror": {
+                "desc": {
+                    "before": "Mirror bluefs data to file system for testing/validation",
+                    "after": "Mirror BlueFS data to file system for testing/validation"
+                }
+            },
+            "bluestore_fragmentation_check_period": {
+                "desc": {
+                    "before": "The period to perform bluestore free fragmentation check. Checking fragmentation is usually almost immediate. For highly fragmented storage, it can take several miliseconds. It can cause a stall to a write operation.",
+                    "after": "The interval at which to perform a BlueStore free fragmentation check. Checking fragmentation is usually almost immediate. For highly fragmented storage, it can take several miliseconds and can cause a write operation to stall."
+                }
+            },
+            "bluestore_avl_alloc_bf_free_pct": {
+                "desc": {
+                    "before": "Sets threshold at which shrinking free space (in %, integer) triggers enabling best-fit mode.",
+                    "after": "Sets the threshold at which shrinking free space (in %, integer) triggers enabling best-fit mode."
+                }
+            },
+            "filestore_wbthrottle_btrfs_inodes_hard_limit": {
+                "desc": {
+                    "before": "Block writing when this many inodes have outstanding writes (btrfs)",
+                    "after": "Block writing when this many inodes have outstanding writes (btrfs, deprecated)"
+                }
+            },
+            "admin_socket": {
+                "desc": {
+                    "before": "path for the runtime control socket file, used by the 'ceph daemon' command",
+                    "after": "Path for the runtime control socket file, used by the 'ceph daemon' command"
+                }
+            },
+            "filestore_fiemap_threshold": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_debug_enforce_min_alloc_size": {
+                "long_desc": {
+                    "before": "This overrides actual min_alloc_size value persisted on mkfs (and originally obtained from bluestore_min_alloc_size) and permits to use arbitrary value for this value. Intended primarily for dev/debug purposes and should be used with care and deep understanding of potential consequences, e.g. data corruption.",
+                    "after": "This overrides the actual min_alloc_size value persisted on mkfs (and originally obtained from bluestore_min_alloc_size) and permits an arbitrary value. Intended primarily for dev/debug purposes and should be used with care and deep understanding of potential consequences, e.g. data corruption."
+                }
+            },
+            "err_to_journald": {
+                "desc": {
+                    "before": "send critical error log lines to journald",
+                    "after": "Send critical error log lines to journald"
+                }
+            },
+            "mon_client_bytes": {
+                "desc": {
+                    "before": "max bytes of outstanding client messages mon will read off the network",
+                    "after": "Max bytes of outstanding client messages mon will read off the network"
+                }
+            },
+            "mon_osd_snap_trim_queue_warn_on": {
+                "desc": {
+                    "before": "Warn when snap trim queue is that large (or larger).",
+                    "after": "Warn when snap trim queue reaches or exceeds this value"
+                }
+            },
+            "osd_object_clean_region_max_num_intervals": {
+                "long_desc": {
+                    "before": "partial recovery uses multiple intervals to record the clean part of the objectwhen the number of intervals is greater than osd_object_clean_region_max_num_intervals, minimum interval will be trimmed(0 will recovery the entire object data interval)",
+                    "after": "Partial recovery uses multiple intervals to record the clean part of the objectwhen the number of intervals is greater than osd_object_clean_region_max_num_intervals, minimum interval will be trimmed(0 will recovery the entire object data interval)"
+                },
+                "desc": {
+                    "before": "number of intervals in clean_offsets",
+                    "after": "Number of intervals in clean_offsets"
+                }
+            },
+            "filestore_wbthrottle_xfs_inodes_start_flusher": {
+                "desc": {
+                    "before": "Start flushing (fsyncing) when this many distinct inodes have been modified (xfs)",
+                    "after": "Start flushing (fsyncing) when this many distinct inodes have been modified (xfs, deprecated)"
+                }
+            },
+            "journal_force_aio": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_fsync_flushes_journal_data": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "osd_pool_default_flag_hashpspool": {
+                "desc": {
+                    "before": "set hashpspool (better hashing scheme) flag on new pools",
+                    "after": "Set hashpspool (better hashing scheme) flag on new pools"
+                }
+            },
+            "public_bind_addr": {
+                "fmt_desc": {
+                    "before": "In some dynamic deployments the Ceph MON daemon might bind to an IP address locally that is different from the ``public_addr`` advertised to other peers in the network. The environment must ensure that routing rules are set correctly. If ``public_bind_addr`` is set the Ceph Monitor daemon will bind to it locally and use ``public_addr`` in the monmaps to advertise its address to peers. This behavior is limited to the Monitor daemon.",
+                    "after": "In some dynamic deployments Ceph Monitor daemons might bind to an IP address locally that is different from the ``public_addr`` advertised to other peers in the network. The environment must ensure that routing rules are set correctly. If ``public_bind_addr`` is set the Ceph Monitor daemon will bind to it locally and use ``public_addr`` in the monmaps to advertise its address to peers. This behavior is limited to the Monitor daemon."
+                }
+            },
+            "mon_keyvaluedb": {
+                "desc": {
+                    "before": "database backend to use for the mon database",
+                    "after": "Database backend to use for the Monitor database"
+                }
+            },
+            "bluestore_volume_selection_reserved_factor": {
+                "desc": {
+                    "before": "DB level size multiplier. Determines amount of space at DB device to bar from the usage when 'use some extra' policy is in action. Reserved size is determined as sum(L_max_size[0], L_max_size[L-1]) + L_max_size[L] * this_factor",
+                    "after": "RocksDB level size multiplier. Determines amount of space at DB device to bar from the usage when 'use some extra' policy is in action. The reserved size is determined by sum(L_max_size[0], L_max_size[L-1]) + L_max_size[L] * this_factor"
+                }
+            },
+            "filestore_min_sync_interval": {
+                "desc": {
+                    "before": "Minimum period between calls to syncfs(2)",
+                    "after": "Minimum period between calls to syncfs(2) (deprecated)"
+                }
+            },
+            "filestore_queue_max_delay_multiple": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_omap_backend": {
+                "desc": {
+                    "before": "The KeyValueDB to use for filestore metadata (ie omap).",
+                    "after": "The KeyValueDB to use for Filestore metadata (that is, omaps) (deprecated)."
+                }
+            },
+            "ms_mon_client_mode": {
+                "fmt_desc": {
+                    "before": "a list of connection modes, in order of preference, for clients or non-monitor daemons to use when connecting to monitors.",
+                    "after": "A list of connection modes, in order of preference, for clients or non-monitor daemons to use when connecting to monitors."
+                }
+            },
+            "osd_pool_default_flags": {
+                "desc": {
+                    "before": "(integer) flags to set on new pools",
+                    "after": "The (integer) flags to set on new pools"
+                }
+            },
+            "auth_service_required": {
+                "fmt_desc": {
+                    "before": "If enabled, the Ceph Storage Cluster daemons require Ceph Clients to authenticate with the Ceph Storage Cluster in order to access Ceph services. Valid settings are ``cephx`` or ``none``.",
+                    "after": "If enabled, Ceph cluster daemons require clients to authenticate with the cluster in order to access Ceph services. Valid settings are ``cephx`` or ``none``."
+                },
+                "desc": {
+                    "before": "authentication methods required by service daemons",
+                    "after": "Authentication methods required by service daemons"
+                }
+            },
+            "mon_max_log_epochs": {
+                "desc": {
+                    "before": "max number of past cluster log epochs to store",
+                    "after": "Max number of past cluster log epochs to store"
+                }
+            },
+            "osd_map_message_max": {
+                "desc": {
+                    "before": "maximum number of OSDMaps to include in a single message",
+                    "after": "Maximum number of OSDMaps to include in a single message"
+                }
+            },
+            "bluestore_cleaner_sleep_interval": {
+                "desc": {
+                    "before": "How long cleaner should sleep before re-checking utilization",
+                    "after": "How long the BlueStore cleaner should sleep before re-checking utilization"
+                }
+            },
+            "bdev_flock_retry_interval": {
+                "desc": {
+                    "before": "interval to retry the flock",
+                    "after": "Interval after which to retry flock"
+                }
+            },
+            "auth_supported": {
+                "desc": {
+                    "before": "authentication methods required (deprecated)",
+                    "after": "Authentication methods required (deprecated)"
+                }
+            },
+            "filestore_btrfs_clone_range": {
+                "desc": {
+                    "before": "Use btrfs clone_range ioctl to efficiently duplicate objects",
+                    "after": "Use btrfs clone_range ioctl to efficiently duplicate objects (deprecated)"
+                }
+            },
+            "jaeger_tracing_enable": {
+                "desc": {
+                    "before": "Ceph should use jaeger tracing system",
+                    "after": "Ceph should use the Jaeger tracing system"
+                }
+            },
+            "filestore_expected_throughput_bytes": {
+                "desc": {
+                    "before": "Expected throughput of backend device (aids throttling calculations)",
+                    "after": "Expected throughput of backend device (aids throttling calculations) (deprecated)"
+                }
+            },
+            "osd_pool_default_flag_bulk": {
+                "desc": {
+                    "before": "set bulk flag on new pools",
+                    "after": "Set the bulk flag on new pools"
+                }
+            },
+            "bluestore_fsck_error_on_no_per_pg_omap": {
+                "desc": {
+                    "before": "Make fsck error (instead of warn) when objects without per-pg omap are found",
+                    "after": "Throw a fsck error (instead of a warning) when objects without per-pg omap are found"
+                }
+            },
+            "filestore_collect_device_partition_information": {
+                "desc": {
+                    "before": "Collect metadata about the backing file system on OSD startup",
+                    "after": "Collect metadata about the backing file system on OSD startup (deprecated)"
+                }
+            },
+            "filestore_ondisk_finisher_threads": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bdev_stalled_read_warn_lifetime": {
+                "desc": {
+                    "before": "A configurable duration for stalled read warning to be appeared if number of stalled read occurence pass `bdev_stalled_read_warn_threshold` in `bdev_stalled_read_warn_lifetime` seconds",
+                    "after": "A configurable duration for a stalled read warning to be raised when the number of stalled reads passes the `bdev_stalled_read_warn_threshold` in `bdev_stalled_read_warn_lifetime` seconds"
+                }
+            },
+            "mon_client_hunt_interval": {
+                "fmt_desc": {
+                    "before": "The client will try a new monitor every ``N`` seconds until it establishes a connection.",
+                    "after": "The client will attempt to connect to a different Monitor every ``N`` seconds until it establishes a connection."
+                }
+            },
+            "filestore_op_threads": {
+                "desc": {
+                    "before": "Threads used to apply changes to backing file system",
+                    "after": "Threads used to apply changes to backing file system (deprecated)"
+                }
+            },
+            "bluestore_block_db_path": {
+                "desc": {
+                    "before": "Path for db block device",
+                    "after": "Path for DB block device"
+                }
+            },
+            "mgr_num_op_tracker_shard": {
+                "desc": {
+                    "before": "The number of shards for holding the ops",
+                    "after": "The number of shards for Manager ops"
+                }
+            },
+            "filestore_wbthrottle_xfs_bytes_start_flusher": {
+                "desc": {
+                    "before": "Start flushing (fsyncing) when this many bytes are written(xfs)",
+                    "after": "Start flushing (fsyncing) when this many bytes are written (xfs, deprecated)"
+                }
+            },
+            "mon_debug_dump_transactions": {
+                "desc": {
+                    "before": "dump paxos transactions to log",
+                    "after": "Dump Paxos transactions to log"
+                }
+            },
+            "mgr_op_history_size": {
+                "fmt_desc": {
+                    "before": "The maximum number of completed operations to track.",
+                    "after": "The maximum number of completed Manager ops to track."
+                }
+            },
+            "filestore_queue_max_bytes": {
+                "desc": {
+                    "before": "Max (written) bytes in flight",
+                    "after": "Max (written) bytes in flight (deprecated)"
+                }
+            },
+            "mon_client_log_interval": {
+                "desc": {
+                    "before": "How frequently we send queued cluster log messages to mon",
+                    "after": "How frequently we send queued cluster log messages to the Monitors"
+                }
+            },
+            "bluestore_log_omap_iterator_age": {
+                "desc": {
+                    "before": "log omap iteration operation if it's slower than this age (seconds)",
+                    "after": "Log an omap iteration operation if it is slower than this age (seconds)"
+                }
+            },
+            "target_max_misplaced_ratio": {
+                "desc": {
+                    "before": "Max ratio of misplaced objects to target when throttling data rebalancing activity",
+                    "after": "Max ratio of misplaced RADOS objects to target when scheduling data rebalancing activity. A lower value results in the balancer making smaller, less impactful changes with the tradeoff of decreased efficiency and longer time to converge. When making CRUSH rules or topolgy changes or performing large cluster expansions, a lower value can help avoid transitory nearfull or backfillfull ratio excursions."
+                }
+            },
+            "osd_pg_log_dups_tracked": {
+                "desc": {
+                    "before": "how many versions back to track in order to detect duplicate ops; this is combined with both the regular pg log entries and additional minimal dup detection entries",
+                    "after": "How many versions back to track in order to detect duplicate ops; this is combined with both the regular pg log entries and additional minimal dup detection entries"
+                }
+            },
+            "mon_sync_max_payload_keys": {
+                "desc": {
+                    "before": "target max keys in message payload for mon sync",
+                    "after": "Target max keys in message payload for Monitor sync"
+                }
+            },
+            "filestore_queue_max_delay_multiple_bytes": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_btrfs_snap": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_queue_max_delay_multiple_ops": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "rados_tracing": {
+                "desc": {
+                    "before": "",
+                    "after": "Should LTTng-UST tracepoints be enabled?"
+                }
+            },
+            "debug_asok_assert_abort": {
+                "desc": {
+                    "before": "allow commands 'assert' and 'abort' via asok for testing crash dumps etc",
+                    "after": "Enable the admin socket commands 'assert' and 'abort' testing crash dumps etc."
+                }
+            },
+            "journal_block_size": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "mon_osd_reporter_subtree_level": {
+                "fmt_desc": {
+                    "before": "In which level of parent bucket the reporters are counted. The OSDs send failure reports to monitors if they find a peer that is not responsive. Monitors mark the reported ``OSD`` out and then ``down`` after a grace period.",
+                    "after": "At which level of parent bucket the reporters are counted. The OSDs send failure reports to monitors if they find a peer that is not responsive. Monitors mark the reported ``OSD`` out and then ``down`` after a grace period."
+                },
+                "desc": {
+                    "before": "in which level of parent bucket the reporters are counted",
+                    "after": "At which level of parent bucket the reporters are counted"
+                }
+            },
+            "bluestore_block_wal_path": {
+                "desc": {
+                    "before": "Path to block device/file backing bluefs wal",
+                    "after": "Path to block device/file backing the BlueFS WAL"
+                }
+            },
+            "filestore_punch_hole": {
+                "desc": {
+                    "before": "Use fallocate(2) FALLOC_FL_PUNCH_HOLE to efficiently zero ranges of objects",
+                    "after": "Use fallocate(2) FALLOC_FL_PUNCH_HOLE to efficiently zero ranges of objects (deprecated)"
+                }
+            },
+            "mon_osd_report_timeout": {
+                "desc": {
+                    "before": "time before OSDs who do not report to the mons are marked down (seconds)",
+                    "after": "Time before OSDs who do not report to the mons are marked down (seconds)"
+                }
+            },
+            "filestore_wbthrottle_xfs_ios_start_flusher": {
+                "desc": {
+                    "before": "Start flushing (fsyncing) when this many IOs are written (xfs)",
+                    "after": "Start flushing (fsyncing) when this many IOs are written (xfs, deprecated)"
+                }
+            },
+            "mgr_op_log_threshold": {
+                "fmt_desc": {
+                    "before": "How many operations logs to display at once.",
+                    "after": "How many Manager op logs to display at once."
+                }
+            },
+            "mon_debug_dump_json": {
+                "desc": {
+                    "before": "dump paxos transasctions to log as json",
+                    "after": "Dump paxos transasctions to log as JSON"
+                }
+            },
+            "bluestore_log_op_age": {
+                "desc": {
+                    "before": "log operation if it's slower than this age (seconds)",
+                    "after": "Log a BlueStore operation if it is slower than this age (seconds)"
+                }
+            },
+            "bluestore_warn_on_free_fragmentation": {
+                "desc": {
+                    "before": "Level at which disk free fragmentation causes health warning. Set \"1\" to disable. This is same value as admin command \"bluestore allocator score block\".",
+                    "after": "The level at which BlueStore block device free fragmentation raises a health warning. Set to \"1\" to disable. This is the value reported by the admin socket command \"bluestore allocator score block\"."
+                }
+            },
+            "admin_socket_mode": {
+                "desc": {
+                    "before": "file mode to set for the admin socket file, e.g, '0755'",
+                    "after": "File mode to set for the admin socket, e.g, '0755'"
+                }
+            },
+            "osd_min_pg_log_entries": {
+                "desc": {
+                    "before": "minimum number of entries to maintain in the PG log",
+                    "after": "Minimum number of entries to maintain in the PG log"
+                }
+            },
+            "bdev_ioring": {
+                "desc": {
+                    "before": "Enables Linux io_uring API instead of libaio",
+                    "after": "Enables the Linux io_uring API instead of libaio"
+                }
+            },
+            "osd_map_message_max_bytes": {
+                "desc": {
+                    "before": "maximum number of bytes worth of OSDMaps to include in a single message",
+                    "after": "Maximum number of bytes worth of OSDMaps to include in a single message"
+                }
+            },
+            "bluestore_warn_on_no_per_pool_omap": {
+                "desc": {
+                    "before": "Enable health indication on lack of per-pool omap",
+                    "after": "Raise a health warning on lack of per-pool omap"
+                }
+            },
+            "mon_debug_no_require_bluestore_for_ec_overwrites": {
+                "desc": {
+                    "before": "do not require bluestore OSDs to enable EC overwrites on a rados pool",
+                    "after": "Do not require BlueStore OSDs to enable EC overwrites within a RADOS pool"
+                }
+            },
+            "lockdep": {
+                "desc": {
+                    "before": "enable lockdep lock dependency analyzer",
+                    "after": "Enable the lockdep lock dependency analyzer"
+                }
+            },
+            "osd_pg_log_trim_max": {
+                "desc": {
+                    "before": "maximum number of entries to remove at once from the PG log",
+                    "after": "Maximum number of entries to remove at once from the PG log"
+                }
+            },
+            "mon_scrub_timeout": {
+                "desc": {
+                    "before": "timeout to restart scrub of mon quorum participant does not respond for the latest chunk",
+                    "after": "Timeout to restart scrub of mon quorum participant does not respond for the latest chunk"
+                }
+            },
+            "osd_memory_cache_min": {
+                "desc": {
+                    "before": "When tcmalloc and cache autotuning is enabled, set the minimum amount of memory used for caches.",
+                    "after": "When TCMalloc and cache autotuning are enabled, set the minimum amount of memory used for caches."
+                }
+            },
+            "journal_dio": {
+                "fmt_desc": {
+                    "before": "Enables direct i/o to the journal. Requires ``journal block align`` set to ``true``.",
+                    "after": "Enables direct i/o to the journal. Requires ``journal block align`` set to ``true``. (deprecateD)"
+                }
+            },
+            "mon_scrub_inject_crc_mismatch": {
+                "desc": {
+                    "before": "probability for injecting crc mismatches into mon scrub",
+                    "after": "Probability for injecting crc mismatches into mon scrub"
+                }
+            },
+            "mon_inject_transaction_delay_probability": {
+                "desc": {
+                    "before": "probability of injecting a delay in paxos",
+                    "after": "Probability of injecting a delay in Paxos"
+                }
+            },
+            "filestore_max_inline_xattr_size": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_debug_enforce_settings": {
+                "long_desc": {
+                    "before": "'hdd' enforces settings intended for BlueStore above a rotational drive. 'ssd' enforces settings intended for BlueStore above a solid drive. 'default' - using settings for the actual hardware.",
+                    "after": "'hdd' enforces settings intended for BlueStore on a rotational drive. 'ssd' enforces settings intended for BlueStore on an SSD. 'default' indicates that BlueStore is to use settings based on the detected hardware."
+                },
+                "desc": {
+                    "before": "Enforces specific hw profile settings",
+                    "after": "Enforces specific hardware profile settings"
+                }
+            },
+            "bluestore_debug_legacy_omap": {
+                "desc": {
+                    "before": "Allows mkfs to create OSD in legacy OMAP naming mode (neither per-pool nor per-pg). This is intended primarily for developers' purposes. The resulting OSD might/would be transformed to the currrently default 'per-pg' format when BlueStore's quick-fix or repair are applied.",
+                    "after": "Allows mkfs to create OSDs with the legacy omap naming mode (neither per-pool nor per-pg). This is intended primarily for developers. The resulting OSDs might / would be transformed to the currrently default 'per-pg' format when BlueStore's quick-fix or repair are applied."
+                }
+            },
+            "osd_memory_target_autotune": {
+                "desc": {
+                    "before": "If enabled, allow orchestrator to automatically tune osd_memory_target",
+                    "after": "If enabled, allow the orchestrator to automatically tune osd_memory_target at host granularity based on available memory, the number of OSDs provisioned on the host, other daemons provisioned on the host, and mgr/cephadm/autotune_memory_target_ratio"
+                }
+            },
+            "tmp_file_template": {
+                "long_desc": {
+                    "before": "The template file name prefix for temporary files. For example, temporary files may be created by `ceph tell` commands using the --daemon-output-file switch.",
+                    "after": "The template file name prefix for temporary files. For example, temporary files may be created by 'ceph tell' commands using the --daemon-output-file switch."
+                }
+            },
+            "mon_debug_no_initial_persistent_features": {
+                "desc": {
+                    "before": "do not set any monmap features for new mon clusters",
+                    "after": "Do not set any monmap features for new Monitor clusters"
+                }
+            },
+            "erasure_code_dir": {
+                "desc": {
+                    "before": "directory where erasure-code plugins can be found",
+                    "after": "Directory where erasure-code plugins can be found"
+                }
+            },
+            "filestore_journal_writeahead": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "log_to_syslog": {
+                "desc": {
+                    "before": "send log lines to syslog facility",
+                    "after": "Send log lines to syslog facility"
+                }
+            },
+            "mon_client_target_rank": {
+                "fmt_desc": {
+                    "before": "automatically target mon rank for client communication",
+                    "after": "Automatically target mon rank for client communication"
+                }
+            },
+            "osd_pool_default_flag_nodelete": {
+                "desc": {
+                    "before": "set nodelete flag on new pools",
+                    "after": "Set the nodelete flag on new pools"
+                }
+            },
+            "mon_allow_pool_delete": {
+                "fmt_desc": {
+                    "before": "Should monitors allow pools to be removed, regardless of what the pool flags say?",
+                    "after": "Should Monitors allow pools to be removed, regardless of what the pool flags say?"
+                }
+            },
+            "bluestore_max_blob_size": {
+                "long_desc": {
+                    "before": "Bluestore blobs are collections of extents (ie on-disk data) originating from one or more objects.  Blobs can be compressed, typically have checksum data, may be overwritten, may be shared (with an extent ref map), or split.  This setting controls the maximum size a blob is allowed to be.",
+                    "after": "BlueStore blobs are collections of extents (on-disk data) originating from one or more RADOS objects.  Blobs can be compressed, typically have checksum data, may be overwritten, may be shared (with an extent ref map), or split.  This setting controls the maximum size a blob is allowed to be. A value of 0 indicates that no limiit is to be enforced."
+                }
+            },
+            "filestore_queue_high_threshhold": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_queue_high_delay_multiple_bytes": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bdev_async_discard_threads": {
+                "desc": {
+                    "before": "number of discard threads used to issue discards to the device",
+                    "after": "Number of discard threads used to issue discards to the device"
+                }
+            },
+            "bluestore_write_v2": {
+                "long_desc": {
+                    "before": "Original write path was developed over long time by constantly adding features. The price was layered inefficiencies gained along the way. Rework of write path done from scratch clears it and optimizes for typical cases. Write_v2 is necessary for recompression feature.",
+                    "after": "The original write path was developed over time, incrementally adding features at the cost of layered inefficiencies. This rework of the write path clears and optimizes for typical cases. Write_v2 is necessary for the recompression feature."
+                }
+            },
+            "public_addr": {
+                "desc": {
+                    "before": "public-facing address to bind to",
+                    "after": "Public-facing address to which to bind"
+                }
+            },
+            "log_max_new": {
+                "fmt_desc": {
+                    "before": "The maximum number of new log files.",
+                    "after": "The maximum number of new log entries."
+                },
+                "desc": {
+                    "before": "max unwritten log entries to allow before waiting to flush to the log",
+                    "after": "Max unwritten log entries to allow before flushing"
+                }
+            },
+            "filestore_fiemap": {
+                "desc": {
+                    "before": "Use fiemap ioctl(2) to determine which parts of objects are sparse",
+                    "after": "Use fiemap ioctl(2) to determine which parts of objects are sparse (deprecated)"
+                }
+            },
+            "setgroup": {
+                "desc": {
+                    "before": "gid or group name to switch to on startup",
+                    "after": "GID or group name to switch to on startup"
+                }
+            },
+            "filestore_sloppy_crc": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_tracing": {
+                "desc": {
+                    "before": "Enable bluestore event tracing.",
+                    "after": "Enable BlueStore event tracing."
+                }
+            },
+            "filestore_max_inline_xattrs_xfs": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "mon_inject_transaction_delay_max": {
+                "desc": {
+                    "before": "max duration of injected delay in paxos",
+                    "after": "Max duration of injected delay in Paxos"
+                }
+            },
+            "osd_calc_pg_upmaps_local_fallback_retries": {
+                "desc": {
+                    "before": "Maximum number of PGs we can attempt to unmap or upmap for a specific overfull or underfull osd per iteration ",
+                    "after": "Maximum number of PGs we can attempt to unmap or upmap for a specific overfull or underfull OSD per iteration"
+                }
+            },
+            "filestore_update_to": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_journal_parallel": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "objecter_timeout": {
+                "desc": {
+                    "before": "Seconds before in-flight op is considered 'laggy' and we query mon for the latest OSDMap",
+                    "after": "Seconds before in-flight op is considered laggy and we query the Monitors for the latest OSDMap"
+                }
+            },
+            "bdev_type": {
+                "desc": {
+                    "before": "Explicitly set the device type to select the driver if it's needed",
+                    "after": "Explicitly set the device type to select the driver if needed"
+                }
+            },
+            "filestore_omap_backend_path": {
+                "desc": {
+                    "before": "The path where the filestore KeyValueDB should store it's database(s).",
+                    "after": "The path where the Filestore KeyValueDB should store its database(s) (deprecated)"
+                }
+            },
+            "bluestore_blobid_prealloc": {
+                "desc": {
+                    "before": "Number of unique blob ids to preallocate at a time",
+                    "after": "Number of unique blob IDs to preallocate at a time"
+                }
+            },
+            "cephsqlite_blocklist_dead_locker": {
+                "desc": {
+                    "before": "blocklist the last dead owner of the database lock",
+                    "after": "Blocklist the last dead owner of the database lock"
+                }
+            },
+            "mon_sync_timeout": {
+                "desc": {
+                    "before": "timeout before canceling sync if syncing mon does not respond",
+                    "after": "Timeout before canceling sync if syncing mon does not respond"
+                }
+            },
+            "osd_target_pg_log_entries_per_osd": {
+                "desc": {
+                    "before": "target number of PG entries total on an OSD - limited per pg by the min and max options below",
+                    "after": "Target number of PG entries total on an OSD, limited per PG by the min and max options below"
+                }
+            },
+            "osd_target_transaction_size": {
+                "type": {
+                    "before": "int",
+                    "after": "uint"
+                }
+            },
+            "mon_scrub_interval": {
+                "fmt_desc": {
+                    "before": "How often the monitor scrubs its store by comparing the stored checksums with the computed ones for all stored keys. (0 disables it. dangerous, use with care)",
+                    "after": "How often the monitor scrubs its store by comparing the stored checksums with the computed ones for all stored keys. (0 disables, which is dangerous and must be used with care, lest the gods smite you.)"
+                },
+                "desc": {
+                    "before": "frequency for scrubbing mon database",
+                    "after": "Frequency for scrubbing the Monitor database"
+                }
+            },
+            "rotating_keys_renewal_timeout": {
+                "desc": {
+                    "before": "timeout for updating rotating keys (seconds)",
+                    "after": "Timeout for updating rotating keys (seconds)"
+                }
+            },
+            "filestore_caller_concurrency": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "journal_zero_on_create": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                },
+                "fmt_desc": {
+                    "before": "Causes the file store to overwrite the entire journal with\n``0``'s during ``mkfs``.\n",
+                    "after": "Causes Filestore to overwrite the entire journal with\n``0``'s during ``mkfs``.\n"
+                }
+            },
+            "log_graylog_port": {
+                "desc": {
+                    "before": "port number for the remote graylog server",
+                    "after": "TCP port number for the remote Graylog server"
+                }
+            },
+            "osd_memory_target": {
+                "desc": {
+                    "before": "When tcmalloc and cache autotuning is enabled, try to keep this many bytes mapped in memory.",
+                    "after": "When TCMalloc and cache autotuning are enabled, try to keep this many bytes mapped in memory."
+                }
+            },
+            "filestore_wbthrottle_enable": {
+                "desc": {
+                    "before": "Enabling throttling of operations to backing file system",
+                    "after": "Enabling throttling of operations to backing file system (deprecated)"
+                }
+            },
+            "filestore_fd_cache_size": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bdev_read_preallocated_huge_buffers": {
+                "long_desc": {
+                    "before": "Arrangement of preallocated, huge pages-based pools for reading from a KernelDevice. Applied to minimize size of scatter-gather lists sent to NICs. Targets really  big buffers (>= 2 or 4 MBs). Keep in mind the system must be configured accordingly (see /proc/sys/vm/nr_hugepages). Otherwise the OSD wil fail early. Beware BlueStore, by default, stores large chunks across many smaller blobs. Increasing bluestore_max_blob_size changes that, and thus allows the data to be read back into small number of huge page-backed buffers.",
+                    "after": "Arrangement of preallocated, huge pages-based pools for reading from a KernelDevice. Applied to minimize size of scatter-gather lists sent to NICs. Targets really  big buffers (>= 2 or 4 MBs). Keep in mind the system must be configured accordingly (see /proc/sys/vm/nr_hugepages). Otherwise the OSD wil fail early. Beware that BlueStore, by default, stores large chunks across many smaller blobs. Increasing bluestore_max_blob_size changes that, and thus allows the data to be read back into small number of huge page-backed buffers."
+                }
+            },
+            "mon_warn_on_msgr2_not_enabled": {
+                "desc": {
+                    "before": "issue MON_MSGR2_NOT_ENABLED health warning if monitors are all running Nautilus but not all binding to a msgr2 port",
+                    "after": "Raise the MON_MSGR2_NOT_ENABLED health warning if monitors are all running Nautilus but not all binding to a msgr2 port"
+                }
+            },
+            "osd_tier_default_cache_min_write_recency_for_promote": {
+                "desc": {
+                    "before": "number of recent HitSets the object must appear in to be promoted (on write)",
+                    "after": "Number of recent HitSets the object must appear in to be promoted (on write)"
+                }
+            },
+            "bluestore_debug_inject_csum_err_probability": {
+                "desc": {
+                    "before": "inject crc verification errors into bluestore device reads",
+                    "after": "Inject CRC verification errors into BlueStore device reads"
+                }
+            },
+            "setuser": {
+                "desc": {
+                    "before": "uid or user name to switch to on startup",
+                    "after": "UID or user name to switch to on startup"
+                }
+            },
+            "mon_debug_deprecated_as_obsolete": {
+                "desc": {
+                    "before": "treat deprecated mon commands as obsolete",
+                    "after": "Treat deprecated mon commands as obsolete"
+                }
+            },
+            "filestore_wbthrottle_btrfs_inodes_start_flusher": {
+                "desc": {
+                    "before": "Start flushing (fsyncing) when this many distinct inodes have been modified (btrfs)",
+                    "after": "Start flushing (fsyncing) when this many distinct inodes have been modified (deprecated) (btrfs)"
+                }
+            },
+            "bluestore_fsck_error_on_no_per_pool_omap": {
+                "desc": {
+                    "before": "Make fsck error (instead of warn) when objects without per-pool omap are found",
+                    "after": "Throw a fsck error (instead of a warning) when objects without per-pool omap are found"
+                }
+            },
+            "bluefs_buffered_io": {
+                "long_desc": {
+                    "before": "When this option is enabled, bluefs will in some cases perform buffered reads.  This allows the kernel page cache to act as a secondary cache for things like RocksDB block reads.  For example, if the rocksdb block cache isn't large enough to hold all blocks during OMAP iteration, it may be possible to read them from page cache instead of from the disk.  This can dramatically improve performance when the osd_memory_target is too small to hold all entries in block cache but it does come with downsides.  It has been reported to occasionally cause excessive kernel swapping (and associated stalls) under certain workloads. Currently the best and most consistent performing combination appears to be enabling bluefs_buffered_io and disabling system level swap.  It is possible that this recommendation may change in the future however.",
+                    "after": "When this option is enabled, BlueFS will in some cases perform buffered reads.  This allows the kernel page cache to act as a secondary cache for things like RocksDB block reads.  For example, if the RocksDB block cache isn't large enough to hold all blocks during omap iteration, it may be possible to read them from page cache instead of from the device.  This can dramatically improve performance when the osd_memory_target is too small to hold all entries in block cache but it does come with downsides.  It has been reported to occasionally cause excessive kernel swapping (and associated stalls) under certain workloads. Currently the best and most consistent performing combination appears to be enabling bluefs_buffered_io and disabling system level swap.  It is possible that this recommendation may change in the future however."
+                },
+                "desc": {
+                    "before": "Enabled buffered IO for bluefs reads.",
+                    "after": "Enabled buffered IO for BlueFS reads."
+                }
+            },
+            "ec_extent_cache_size": {
+                "desc": {
+                    "before": "Size of per-shard extent cache",
+                    "after": "Size of the per-shard extent cache"
+                }
+            },
+            "filestore_queue_max_ops": {
+                "desc": {
+                    "before": "Max IO operations in flight",
+                    "after": "Max IO operations in flight (deprecated)"
+                }
+            },
+            "osd_heartbeat_min_size": {
+                "desc": {
+                    "before": "Minimum heartbeat packet size in bytes. Will add dummy payload if heartbeat packet is smaller than this.",
+                    "after": "Minimum heartbeat packet size in bytes. Will padd if the heartbeat packet is smaller than this. This helps identify host and switch MTU configuration issues when jumbo frames are in use."
+                }
+            },
+            "mon_scrub_max_keys": {
+                "desc": {
+                    "before": "max keys per on scrub chunk/step",
+                    "after": "Max keys per on scrub chunk/step"
+                }
+            },
+            "filestore_splice": {
+                "desc": {
+                    "before": "Use splice(2) to more efficiently copy data between files",
+                    "after": "Use splice(2) to more efficiently copy data between files (deprecated)"
+                }
+            },
+            "mon_max_osd": {
+                "desc": {
+                    "before": "max number of OSDs in a cluster",
+                    "after": "Max number of OSDs in a cluster"
+                }
+            },
+            "journal_replay_from": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_deferred_batch_ops_hdd": {
+                "desc": {
+                    "before": "Default bluestore_deferred_batch_ops for rotational media",
+                    "after": "Default bluestore_deferred_batch_ops for rotational media (HDD)"
+                }
+            },
+            "chdir": {
+                "desc": {
+                    "before": "path to chdir(2) to after daemonizing",
+                    "after": "Path to chdir(2) to after daemonizing"
+                }
+            },
+            "bluestore_spdk_max_io_completion": {
+                "desc": {
+                    "before": "Maximal I/Os to be batched completed while checking queue pair completions, 0 means let spdk library determine it",
+                    "after": "Maximum number of operations to be batched completed while checking queue pair completions, 0 means to let the SPDK library determine the value"
+                }
+            },
+            "filestore_max_xattr_value_size_xfs": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_fsck_error_on_no_per_pool_stats": {
+                "desc": {
+                    "before": "Make fsck error (instead of warn) when bluestore lacks per-pool stats, e.g., after an upgrade",
+                    "after": "Direct that fsck throws an error (instead of raising a warning) when BlueStore OSDs lack per-pool stats, for example after an upgrade"
+                }
+            },
+            "cluster_addr": {
+                "desc": {
+                    "before": "cluster-facing address to bind to",
+                    "after": "Cluster-facing address to bind to"
+                }
+            },
+            "max_rotating_auth_attempts": {
+                "desc": {
+                    "before": "number of attempts to initialize rotating keys before giving up",
+                    "after": "Mumber of attempts to initialize rotating keys before giving up"
+                }
+            },
+            "bluestore_warn_on_spurious_read_errors": {
+                "desc": {
+                    "before": "Enable health indication when spurious read errors are observed by OSD",
+                    "after": "Raise a health warning when spurious read errors are observed by an OSD"
+                }
+            },
+            "filestore_fadvise": {
+                "desc": {
+                    "before": "Use posix_fadvise(2) to pass hints to file system",
+                    "after": "Use posix_fadvise(2) to pass hints to file system (deprecated)"
+                }
+            },
+            "mgr_client_service_daemon_unregister_timeout": {
+                "desc": {
+                    "before": "Time to wait during shutdown to deregister service with mgr",
+                    "after": "Time to wait during shutdown to deregister a service with the Manager"
+                }
+            },
+            "mon_osd_full_ratio": {
+                "desc": {
+                    "before": "full ratio of OSDs to be set during initial creation of the cluster",
+                    "after": "Full ratio of OSDs to be set during initial creation of the cluster"
+                }
+            },
+            "ms_mon_service_mode": {
+                "fmt_desc": {
+                    "before": "a list of permitted modes for clients or other Ceph daemons to use when connecting to monitors.",
+                    "after": "A list of permitted modes for clients or other Ceph daemons to use when connecting to monitors."
+                }
+            },
+            "pid_file": {
+                "fmt_desc": {
+                    "before": "The file in which the mon, osd or mds will write its PID.  For instance, ``/var/run/$cluster/$type.$id.pid`` will create /var/run/ceph/mon.a.pid for the ``mon`` with id ``a`` running in the ``ceph`` cluster. The ``pid file`` is removed when the daemon stops gracefully. If the process is not daemonized (i.e. runs with the ``-f`` or ``-d`` option), the ``pid file`` is not created.",
+                    "after": "The file in which Monitors, OSDs, and MDSes will write their PIDs.  For instance, ``/var/run/$cluster/$type.$id.pid`` will create /var/run/ceph/mon.a.pid for the ``mon`` with id ``a`` running in the ``ceph`` cluster. The ``pid file`` is removed when the daemon stops gracefully. If the process is not daemonized (i.e. runs with the ``-f`` or ``-d`` option), the ``pid file`` is not created."
+                }
+            },
+            "bluestore_warn_on_legacy_statfs": {
+                "desc": {
+                    "before": "Enable health indication on lack of per-pool statfs reporting from bluestore",
+                    "after": "Raise a health warning on the lack of per-pool statfs reporting from a BlueStore OSD"
+                }
+            },
+            "mon_osd_min_down_reporters": {
+                "desc": {
+                    "before": "number of OSDs from different subtrees who need to report a down OSD for it to count",
+                    "after": "Number of OSDs from different subtrees who need to report a down OSD for it to count"
+                }
+            },
+            "auth_client_required": {
+                "fmt_desc": {
+                    "before": "If enabled, the Ceph Client requires the Ceph Storage Cluster to authenticate with the Ceph Client. Valid settings are ``cephx`` or ``none``.",
+                    "after": "If enabled, Ceph clients require the Ceph cluster to authenticate with Ceph clients. Valid settings are ``cephx`` or ``none``."
+                },
+                "desc": {
+                    "before": "authentication methods allowed by clients",
+                    "after": "Authentication methods allowed by clients"
+                }
+            },
+            "filestore_commit_timeout": {
+                "desc": {
+                    "before": "Seconds before backing file system is considered hung",
+                    "after": "Seconds before backing file system is considered hung (deprecated)"
+                }
+            },
+            "err_to_syslog": {
+                "desc": {
+                    "before": "send critical error log lines to syslog facility",
+                    "after": "Send critical error log lines to syslog facility"
+                }
+            },
+            "filestore_wbthrottle_btrfs_bytes_start_flusher": {
+                "desc": {
+                    "before": "Start flushing (fsyncing) when this many bytes are written(btrfs)",
+                    "after": "Start flushing (fsyncing) when this many bytes are written (btrfs, deprecated)"
+                }
+            },
+            "mgr_op_history_slow_op_size": {
+                "desc": {
+                    "before": "Max number of slow ops to track",
+                    "after": "Max number of slow Manager ops to track"
+                }
+            },
+            "osd_fast_shutdown_notify_mon": {
+                "long_desc": {
+                    "before": "Tell the monitor the OSD is shutting down on immediate shutdown. This helps with cluster log messages from other OSDs reporting it immediately failed.",
+                    "after": "Tell the Monitors the OSD is shutting down on immediate shutdown. This helps with cluster log messages from other OSDs reporting it immediately failed."
+                },
+                "desc": {
+                    "before": "Tell mon about OSD shutdown on immediate shutdown",
+                    "after": "Tell the Monitors about OSD shutdown on immediate shutdown"
+                }
+            },
+            "filestore_queue_high_delay_multiple_ops": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "journal_ignore_corruption": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "log_flush_on_exit": {
+                "desc": {
+                    "before": "set a process exit handler to ensure the log is flushed on exit",
+                    "after": "Set a process exit handler to ensure the log is flushed on exit"
+                }
+            },
+            "filestore_max_inline_xattr_size_xfs": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "container_image": {
+                "desc": {
+                    "before": "container image (used by cephadm orchestrator)",
+                    "after": "Container image for core daemons, used by the cephadm orchestrator"
+                }
+            },
+            "rocksdb_partition_filters": {
+                "long_desc": {
+                    "before": "This is an experimental option for rocksdb that works in conjunction with two_level indices to avoid having to keep the entire filter/index in cache when cache_index_and_filter_blocks is true.  The idea is to keep a much smaller top-level index in heap/cache and then opportunistically cache the lower level indices.  See: https://github.com/facebook/rocksdb/wiki/Partitioned-Index-Filters",
+                    "after": "This is an experimental option for RocksDB that works in conjunction with two_level indices to avoid having to keep the entire filter/index in cache when cache_index_and_filter_blocks is true.  The idea is to keep a much smaller top-level index in heap/cache and then opportunistically cache the lower level indices.  See: https://github.com/facebook/rocksdb/wiki/Partitioned-Index-Filters"
+                },
+                "desc": {
+                    "before": "(experimental) partition SST index/filters into smaller blocks",
+                    "after": "(Experimental) partition SST index/filters into smaller blocks"
+                }
+            },
+            "run_dir": {
+                "desc": {
+                    "before": "path for the 'run' directory for storing pid and socket files",
+                    "after": "Path for the 'run' directory for storing pid and socket files"
+                }
+            },
+            "mon_min_osdmap_epochs": {
+                "desc": {
+                    "before": "min number of OSDMaps to store",
+                    "after": "Min number of OSDMaps to store"
+                }
+            },
+            "journal_throttle_max_multiple": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "osd_tier_default_cache_min_read_recency_for_promote": {
+                "desc": {
+                    "before": "number of recent HitSets the object must appear in to be promoted (on read)",
+                    "after": "Number of recent HitSets the object must appear in to be promoted (on read)"
+                }
+            },
+            "debug_asserts_on_shutdown": {
+                "desc": {
+                    "before": "Enable certain asserts to check for refcounting bugs on shutdown; see http://tracker.ceph.com/issues/21738",
+                    "after": "Enable certain assertions to check for refcounting bugs on shutdown; see http://tracker.ceph.com/issues/21738"
+                }
+            },
+            "filestore_wbthrottle_btrfs_ios_hard_limit": {
+                "desc": {
+                    "before": "Block writes when this many IOs haven't been flushed (fsynced) (btrfs)",
+                    "after": "Block writes when this many IOs haven't been flushed (fsynced) (btrfs,deprecated)"
+                }
+            },
+            "filestore_fd_cache_shards": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_max_sync_interval": {
+                "desc": {
+                    "before": "Period between calls to syncfs(2) and journal trims (seconds)",
+                    "after": "Period between calls to syncfs(2) and journal trims (seconds)(Deprecated)"
+                }
+            },
+            "bluestore_rocksdb_options": {
+                "desc": {
+                    "before": "Full set of rocksdb settings to override",
+                    "after": "Full set of RocksDB settings to override"
+                }
+            },
+            "osd_erasure_code_plugins": {
+                "desc": {
+                    "before": "erasure code plugins to load",
+                    "after": "Erasure code plugins to load"
+                }
+            },
+            "osd_mon_report_interval": {
+                "fmt_desc": {
+                    "before": "The number of seconds a Ceph OSD Daemon may wait from startup or another reportable event before reporting to a Ceph Monitor.",
+                    "after": "The number of seconds a Ceph OSD may wait from startup or another reportable event before reporting to a Ceph Monitor."
+                }
+            },
+            "filestore_expected_throughput_ops": {
+                "desc": {
+                    "before": "Expected through of backend device in IOPS (aids throttling calculations)",
+                    "after": "Expected through of backend device in IOPS (aids throttling calculations) (deprecated)"
+                }
+            },
+            "osd_max_pg_per_osd_hard_ratio": {
+                "long_desc": {
+                    "before": "OSD will refuse to instantiate PG if the number of PG it serves exceeds this number.",
+                    "after": "An OSD will refuse to instantiate a PG if the number of PGs it serves exceeds this number."
+                },
+                "desc": {
+                    "before": "Maximum number of PG per OSD, a factor of 'mon_max_pg_per_osd'",
+                    "after": "Maximum multiple of mon_max_pg_per_osd PGs an OSD will allow"
+                }
+            },
+            "jaeger_agent_port": {
+                "desc": {
+                    "before": "port number of the jaeger agent",
+                    "after": "TCP port number of the Jaeger agent"
+                }
+            },
+            "fio_dir": {
+                "desc": {
+                    "before": "",
+                    "after": "FIO data directory for FIO-objectstore"
+                }
+            },
+            "mon_debug_dump_location": {
+                "desc": {
+                    "before": "file to dump paxos transactions to",
+                    "after": "File to which to dump Paxos transactions"
+                }
+            },
+            "bluestore_kvbackend": {
+                "desc": {
+                    "before": "Key value database to use for bluestore",
+                    "after": "Key value database to use for BlueStore"
+                }
+            },
+            "rados_replica_read_policy_on_objclass": {
+                "fmt_desc": {
+                    "before": "This would enable objclass ops to leverage read policy that can\ndetermine which OSD will receive read operation. The reason\nwe might want to disable this is because objclass operations may\nnot be flagged correctly as read or write ops and we don't want\nwrite ops to be sent to the wrong OSD (and system won't function\ncorrectly).\n",
+                    "after": "This enables objclass ops to leverage read policy that can\ndetermine which OSD will receive read operations. The reason\nto disable by default this is because objclass operations may\nnot be flagged correctly as read or write ops and we don't want\nwrite ops to be sent to the wrong OSD, in which case the system won't function\ncorrectly.\n"
+                },
+                "desc": {
+                    "before": "enable read policy for sending read requests to OSD on objclass ops",
+                    "after": "Enable read policy for sending read requests to OSD on objclass ops"
+                }
+            },
+            "journal_throttle_high_threshhold": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bdev_enable_discard": {
+                "see_also": {
+                    "before": [
+                        "bdev_async_discard_threads"
+                    ],
+                    "after": [
+                        "bdev_async_discard_threads",
+                        "bluestore_discard_on_mkfs"
+                    ]
+                },
+                "desc": {
+                    "before": "send discards to the block device",
+                    "after": "Enable OSD devices trimming during in runtime"
+                }
+            },
+            "bluestore_warn_on_bluefs_spillover": {
+                "desc": {
+                    "before": "Enable health indication on bluefs slow device usage",
+                    "after": "Raise a health warning on BlueFS slow device spillover"
+                }
+            },
+            "setuser_match_path": {
+                "long_desc": {
+                    "before": "If setuser or setgroup are specified, and this option is non-empty, then the uid/gid of the daemon will only be changed if the file or directory specified by this option has a matching uid and/or gid.  This exists primarily to allow switching to user ceph for OSDs to be conditional on whether the osd data contents have also been chowned after an upgrade.  This is normally specified by the systemd unit file.",
+                    "after": "If setuser or setgroup are specified, and this option is non-empty, then the uid/gid of the daemon will only be changed if the file or directory specified by this option has a matching uid and/or gid.  This exists primarily to allow switching to the 'ceph' user for OSDs to be conditional on whether the OSD data contents have also been chowned after an upgrade.  This is normally specified by the systemd unit file and is a historical artifact of changes made in the Jewel release."
+                },
+                "desc": {
+                    "before": "if set, setuser/setgroup is condition on this path matching ownership",
+                    "after": "If set, setuser/setgroup is conditional on this path matching ownership"
+                }
+            },
+            "log_max_recent": {
+                "desc": {
+                    "before": "recent log entries to keep in memory to dump in the event of a crash",
+                    "after": "Recent log entries to keep in memory to dump in the event of a crash"
+                }
+            },
+            "mon_fake_pool_delete": {
+                "desc": {
+                    "before": "fake pool deletions by renaming the rados pool",
+                    "after": "Fake pool deletions by renaming the RADOS pool"
+                }
+            },
+            "bluestore_async_db_compaction": {
+                "long_desc": {
+                    "before": "How to perform DB compactions triggered either through async socket or by OSD initialization procedure on start.",
+                    "after": "Should BlueStore accept DB compaction requests via the admin socket?"
+                }
+            },
+            "mgr_op_history_duration": {
+                "desc": {
+                    "before": "The oldest completed operation to track.",
+                    "after": "The oldest completed Manager operation to track."
+                }
+            },
+            "bluestore_hybrid_alloc_mem_cap": {
+                "desc": {
+                    "before": "Maximum RAM hybrid allocator should use before enabling bitmap supplement",
+                    "after": "The maximum amount of memory the hybrid allocator should use before enabling bitmap supplement"
+                }
+            },
+            "ms_client_mode": {
+                "fmt_desc": {
+                    "before": "a list of connection modes, in order of preference, for clients to use (or allow) when talking to a Ceph cluster.",
+                    "after": "A list of connection modes, in order of preference, for clients to use (or allow) when talking to a Ceph cluster."
+                }
+            },
+            "mon_client_max_log_entries_per_message": {
+                "fmt_desc": {
+                    "before": "The maximum number of log entries a monitor will generate per client message.",
+                    "after": "The maximum number of log entries a Monitor will generate per client message."
+                }
+            },
+            "bluestore_rocksdb_options_annex": {
+                "desc": {
+                    "before": "An addition to bluestore_rocksdb_options. Allows setting rocksdb options without repeating the existing defaults.",
+                    "after": "An addition to bluestore_rocksdb_options. Allows setting RocksDB options without repeating the existing defaults."
+                }
+            },
+            "filestore_max_inline_xattrs": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "osd_pool_default_min_size": {
+                "desc": {
+                    "before": "the minimal number of copies allowed to write to a degraded pool for new replicated pools",
+                    "after": "The minimal number of copies allowed to write to a degraded pool for new replicated pools"
+                }
+            },
+            "filestore_queue_high_delay_multiple": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "mon_osd_nearfull_ratio": {
+                "desc": {
+                    "before": "nearfull ratio for OSDs to be set during initial creation of cluster",
+                    "after": "Nearfull ratio for OSDs to be set during initial creation of cluster"
+                }
+            },
+            "mon_probe_timeout": {
+                "desc": {
+                    "before": "timeout for querying other mons during bootstrap pre-election phase (seconds)",
+                    "after": "Timeout for querying other mons during bootstrap pre-election phase (seconds)"
+                }
+            },
+            "log_to_stderr": {
+                "long_desc": {
+                    "before": "",
+                    "after": "When Ceph runs as a library (e.g., librados), the default value set to false because stderr may not be writable by the application. For daemons, the daemon_default of false is used instead."
+                }
+            },
+            "bluestore_max_defer_interval": {
+                "desc": {
+                    "before": "max duration to force deferred submit",
+                    "after": "Max duration to force deferred submit"
+                }
+            },
+            "journal_max_write_entries": {
+                "desc": {
+                    "before": "Max IOs in flight to journal",
+                    "after": "Max IOs in flight to journal (deprecated)"
+                }
+            },
+            "journal_align_min_size": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "journal_discard": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "mon_osd_force_trim_to": {
+                "fmt_desc": {
+                    "before": "Force monitor to trim osdmaps to this point, even if there is PGs not clean at the specified epoch (0 disables it. dangerous, use with care)",
+                    "after": "Force monitor to trim osdmaps to this point, even if there is PGs not clean at the specified epoch (0 disables, which is dangerous and must be used with care)."
+                },
+                "desc": {
+                    "before": "force mons to trim osdmaps through this epoch",
+                    "after": "Force Monitors to trim osdmaps through this epoch"
+                }
+            },
+            "bluestore_csum_type": {
+                "long_desc": {
+                    "before": "crc32c, xxhash32, and xxhash64 are available.  The _16 and _8 variants use only a subset of the bits for more compact (but less reliable) checksumming.",
+                    "after": "Algorithms crc32c, xxhash32, and xxhash64 are available.  The _16 and _8 variants use only a subset of the bits for more compact (but less reliable) checksumming."
+                }
+            },
+            "mon_max_mdsmap_epochs": {
+                "desc": {
+                    "before": "max number of FSMaps/MDSMaps to store",
+                    "after": "Max number of FSMaps/MDSMaps to store"
+                }
+            },
+            "mon_dns_srv_name": {
+                "fmt_desc": {
+                    "before": "the service name used querying the DNS for the monitor hosts/addresses",
+                    "after": "The service name used querying the DNS for Monitor hosts / addresses"
+                },
+                "desc": {
+                    "before": "name of DNS SRV record to check for monitor addresses",
+                    "after": "Name of DNS SRV record to check for monitor addresses"
+                }
+            },
+            "journal_throttle_low_threshhold": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "auth_cluster_required": {
+                "fmt_desc": {
+                    "before": "If enabled, the Ceph Storage Cluster daemons (i.e., ``ceph-mon``, ``ceph-osd``, ``ceph-mds`` and ``ceph-mgr``) must authenticate with each other. Valid settings are ``cephx`` or ``none``.",
+                    "after": "If enabled, Ceph cluster daemons (i.e., ``ceph-mon``, ``ceph-osd``, ``ceph-mds`` and ``ceph-mgr``) must authenticate with each other. Valid settings are ``cephx`` or ``none``."
+                },
+                "desc": {
+                    "before": "authentication methods required by the cluster",
+                    "after": "Authentication methods required by the cluster"
+                }
+            },
+            "filestore_inject_stall": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "host": {
+                "long_desc": {
+                    "before": "if blank, ceph assumes the short hostname (hostname -s)",
+                    "after": "If blank, Ceph uses the short hostname (hostname -s)"
+                }
+            },
+            "daemonize": {
+                "desc": {
+                    "before": "whether to daemonize (background) after startup",
+                    "after": "Whether to daemonize (background) after startup"
+                }
+            },
+            "log_coarse_timestamps": {
+                "desc": {
+                    "before": "timestamp log entries from coarse system clock to improve performance",
+                    "after": "Timestamp log entries from coarse system clock to improve performance"
+                }
+            },
+            "bluestore_fail_eio": {
+                "long_desc": {
+                    "before": "whether bluestore osd fails on eio",
+                    "after": "Whether BlueStore OSDs fail on EIO"
+                }
+            },
+            "mon_sync_requester_kill_at": {
+                "desc": {
+                    "before": "kill mon sync requestor at specific point",
+                    "after": "Kill mon sync requestor at specific point"
+                }
+            },
+            "osd_memory_base": {
+                "desc": {
+                    "before": "When tcmalloc and cache autotuning is enabled, estimate the minimum amount of memory in bytes the OSD will need.",
+                    "after": "When TCMalloc and cache autotuning are enabled, estimate the minimum amount of memory in bytes the OSD will need."
+                }
+            },
+            "mgr_op_complaint_time": {
+                "desc": {
+                    "before": "An operation becomes complaint worthy after the specified number of seconds have elapsed.",
+                    "after": "A Manager operation becomes complaint-worthy after the specified number of seconds have elapsed."
+                }
+            },
+            "lockdep_force_backtrace": {
+                "desc": {
+                    "before": "always gather current backtrace at every lock",
+                    "after": "Gather a current backtrace at every lock"
+                }
+            },
+            "bluestore_slow_ops_warn_threshold": {
+                "desc": {
+                    "before": "Set the minimum number of BlueStore slow ops before raising a health warning state",
+                    "after": "Set the minimum number of BlueStore slow ops before raising a health warning"
+                }
+            },
+            "mon_max_nvmeof_epochs": {
+                "desc": {
+                    "before": "max number of nvmeof gateway maps to store",
+                    "after": "Max number of NVMeoF gateway maps to store"
+                }
+            },
+            "filestore_max_xattr_value_size_btrfs": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_cache_kv_ratio": {
+                "desc": {
+                    "before": "Ratio of bluestore cache to devote to key/value database (RocksDB)",
+                    "after": "Ratio of BlueStore cache to devote to key/value database (RocksDB)"
+                }
+            },
+            "osd_pool_default_flag_nopgchange": {
+                "desc": {
+                    "before": "set nopgchange flag on new pools",
+                    "after": "Set the nopgchange flag on new pools"
+                }
+            },
+            "osd_objectstore": {
+                "enum_values": {
+                    "before": [
+                        "bluestore",
+                        "filestore",
+                        "memstore",
+                        "kstore",
+                        "seastore",
+                        "cyanstore"
+                    ],
+                    "after": [
+                        "bluestore",
+                        "filestore",
+                        "memstore",
+                        "seastore",
+                        "cyanstore"
+                    ]
+                },
+                "desc": {
+                    "before": "backend type for an OSD (like filestore or bluestore)",
+                    "after": "Default back end for new OSDs"
+                }
+            },
+            "rados_mon_op_timeout": {
+                "desc": {
+                    "before": "timeout for operations handled by monitors such as statfs (0 is unlimited)",
+                    "after": "Timeout for operations handled by Monitors, for example  statfs(). (0 is unlimited)"
+                }
+            },
+            "filestore_apply_finisher_threads": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_journal_trailing": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_debug_omap_check": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_warn_on_no_per_pg_omap": {
+                "desc": {
+                    "before": "Enable health indication on lack of per-pg omap",
+                    "after": "Raise a health warning on lack of per-pg omap"
+                }
+            },
+            "mon_force_quorum_join": {
+                "fmt_desc": {
+                    "before": "Force monitor to join quorum even if it has been previously removed from the map",
+                    "after": "Force a Monitor to join quorum even if it has been previously removed from the map"
+                },
+                "desc": {
+                    "before": "force mon to rejoin quorum even though it was just removed",
+                    "after": "Force a Monitor to rejoin the quorum even though it was just removed"
+                }
+            },
+            "filestore_odsync_write": {
+                "desc": {
+                    "before": "Write with O_DSYNC",
+                    "after": "Write with O_DSYNC (deprecated)"
+                }
+            },
+            "osd_mon_heartbeat_stat_stale": {
+                "fmt_desc": {
+                    "before": "Stop reporting on heartbeat ping times which haven't been updated for this many seconds.  Set to zero to disable this action.",
+                    "after": "Stop reporting on heartbeat ping times which haven't been updated for this many seconds. Set to 0 to disable this action."
+                }
+            },
+            "log_stop_at_utilization": {
+                "desc": {
+                    "before": "stop writing to the log file when device utilization reaches this ratio",
+                    "after": "Stop writing to the log file when device utilization reaches this ratio"
+                }
+            },
+            "filestore_rocksdb_options": {
+                "desc": {
+                    "before": "Options to pass through when RocksDB is used as the KeyValueDB for filestore.",
+                    "after": "Options to pass through when RocksDB is used as the KeyValueDB for (deprecated) Filestore."
+                }
+            },
+            "bluestore_sync_submit_transaction": {
+                "desc": {
+                    "before": "Try to submit metadata transaction to rocksdb in queuing thread context",
+                    "after": "Try to submit metadata transaction to RocksDB in queuing thread context"
+                }
+            },
+            "err_to_graylog": {
+                "desc": {
+                    "before": "send critical error log lines to remote graylog server",
+                    "after": "Send critical error log lines to remote Graylog server"
+                }
+            },
+            "filestore_max_inline_xattrs_other": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "bluestore_volume_selection_policy": {
+                "long_desc": {
+                    "before": "Determines bluefs volume selection policy. 'use_some_extra*' policy allows to override RocksDB level granularity and put high level's data to faster device even when the level doesn't completely fit there. 'fit_to_fast' policy enables using 100% of faster disk capacity and allows the user to turn on 'level_compaction_dynamic_level_bytes' option in RocksDB options.",
+                    "after": "Determine the BlueFS volume selection policy. The 'use_some_extra*' policy allows overriding RocksDB level granularity and placing a high levels' data on a faster device even when the level doesn't completely fit there. The 'fit_to_fast' policy enables using 100% of faster device capacity and allows the user to enable the 'level_compaction_dynamic_level_bytes' RocksDB option."
+                },
+                "desc": {
+                    "before": "Determines bluefs volume selection policy",
+                    "after": "Determine the BlueFS volume selection policy"
+                }
+            },
+            "mon_scrub_inject_missing_keys": {
+                "desc": {
+                    "before": "probability for injecting missing keys into mon scrub",
+                    "after": "Probability for injecting missing keys into mon scrub"
+                }
+            },
+            "mon_debug_no_require_squid": {
+                "desc": {
+                    "before": "do not set squid feature for new mon clusters",
+                    "after": "Do not require the Squid feature for new Monitor clusters"
+                }
+            },
+            "bluestore_block_size": {
+                "desc": {
+                    "before": "Size of file to create for backing bluestore",
+                    "after": "Size of file to create for backing BlueStore"
+                }
+            },
+            "mon_inject_pg_merge_bounce_probability": {
+                "desc": {
+                    "before": "probability of failing and reverting a pg_num decrement",
+                    "after": "Probability of failing and reverting a pg_num decrement"
+                }
+            },
+            "bluestore_nid_prealloc": {
+                "desc": {
+                    "before": "Number of unique object ids to preallocate at a time",
+                    "after": "Number of unique object IDs to preallocate at a time"
+                }
+            },
+            "log_graylog_host": {
+                "desc": {
+                    "before": "address or hostname of graylog server to log to",
+                    "after": "Address or hostname of Graylog server to log to"
+                }
+            },
+            "fatal_signal_handlers": {
+                "desc": {
+                    "before": "whether to register signal handlers for SIGABRT etc that dump a stack trace",
+                    "after": "Whether to register signal handlers for SIGABRT etc that dump a stack trace"
+                }
+            },
+            "filestore_queue_low_threshhold": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "filestore_zfs_snap": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "osd_pool_default_pg_autoscale_mode": {
+                "long_desc": {
+                    "before": "With default value `on`, the autoscaler starts a new pool with 1 pg, unless the user specifies the pg_num.",
+                    "after": "When 'on', the autoscaler assigns 1 pg to new pools unless the user specifies a value."
+                }
+            },
+            "rotating_keys_bootstrap_timeout": {
+                "desc": {
+                    "before": "timeout for obtaining rotating keys during bootstrap phase (seconds)",
+                    "after": "Timeout for obtaining rotating keys during bootstrap phase (seconds)"
+                }
+            },
+            "mgr_op_history_slow_op_threshold": {
+                "desc": {
+                    "before": "Duration of an op to be considered as a historical slow op",
+                    "after": "Duration of a Manager op to be considered as a historical slow op"
+                }
+            },
+            "tmp_dir": {
+                "desc": {
+                    "before": "path for the 'tmp' directory",
+                    "after": "Path for the 'tmp' directory"
+                }
+            },
+            "filestore_wbthrottle_xfs_ios_hard_limit": {
+                "desc": {
+                    "before": "Block writes when this many IOs haven't been flushed (fsynced) (xfs)",
+                    "after": "Block writes when this many IOs haven't been flushed (fsynced) (xfs, deprecated)"
+                }
+            },
+            "bluestore_throttle_cost_per_io_hdd": {
+                "desc": {
+                    "before": "Default bluestore_throttle_cost_per_io for rotational media",
+                    "after": "Default bluestore_throttle_cost_per_io for rotational media (HDDs)"
+                }
+            },
+            "filestore_max_inline_xattr_size_other": {
+                "desc": {
+                    "before": "",
+                    "after": "Deprecated"
+                }
+            },
+            "mon_inject_sync_get_chunk_delay": {
+                "desc": {
+                    "before": "inject delay during sync (seconds)",
+                    "after": "Inject delay during Monitor sync (seconds)"
+                }
+            }
+        },
+        "cephfs-mirror.yaml.in": {
+            "cephfs_mirror_max_concurrent_directory_syncs": {
+                "long_desc": {
+                    "before": "maximum number of directory snapshots that can be synchronized concurrently by cephfs-mirror daemon. Controls the number of synchronization threads.",
+                    "after": "maximum number of directory snapshots that can be crawled concurrently by cephfs-mirror daemon. Controls the number of synchronization crawler threads. Note that the crawler threads also does entry operations like directory creations, file deletes and snapshot deletes/renames."
+                },
+                "desc": {
+                    "before": "maximum number of concurrent snapshot synchronization threads",
+                    "after": "maximum number of concurrent snapshot synchronization crawler threads"
+                }
+            }
+        },
+        "mon.yaml.in": {
+            "mon_down_mkfs_grace": {
+                "flags": {
+                    "before": "",
+                    "after": [
+                        "runtime"
+                    ]
+                }
+            },
+            "nvmeof_mon_client_connect_panic": {
+                "services": {
+                    "before": [
+                        "mon"
+                    ],
+                    "after": null
+                }
+            },
+            "osd_pool_erasure_code_stripe_unit": {
+                "long_desc": {
+                    "before": "",
+                    "after": "A value of 0 causes the code to select either a 4KB or 16KB stripe_unit depending on whether allow_ec_optimizations is enabled."
+                },
+                "fmt_desc": {
+                    "before": "Sets the default size, in bytes, of a chunk of an object stripe for erasure coded pools. Every object of size S will be stored as N stripes, with each data chunk receiving ``stripe unit`` bytes. Each stripe of ``N * stripe unit`` bytes will be encoded/decoded individually. This option can is overridden by the ``stripe_unit`` setting in an erasure code profile.",
+                    "after": "Sets the default size, in bytes, of a chunk of an object stripe for erasure coded pools. Every object of size S will be stored as N stripes, with each data chunk receiving ``stripe unit`` bytes. Each stripe of ``N * stripe unit`` bytes will be encoded/decoded individually. A value of 0 causes the code to select either a 4KB or 16KB stripe_unit depending on whether ``allow_ec_optimizations`` is enabled.  If enabled, ``stripe unit`` is set to 16KB, otherwise it is set to 4KB. This option can be overridden by the ``stripe_unit`` setting in an erasure code profile."
+                },
+                "default": {
+                    "before": "4_K",
+                    "after": 0
+                }
+            }
+        },
+        "mds.yaml.in": {
+            "mds_session_cap_acquisition_throttle": {
+                "desc": {
+                    "before": "threshold at which the cap acquisition decay counter throttles",
+                    "after": "Threshold at which the cap acquisition decay counter throttles"
+                }
+            },
+            "mds_beacon_grace": {
+                "fmt_desc": {
+                    "before": "The interval without beacons before Ceph declares an MDS laggy (and possibly replace it).",
+                    "after": "The interval without beacons before Ceph declares an MDS laggy (and possibly replaces it)."
+                },
+                "desc": {
+                    "before": "tolerance in seconds for missed MDS beacons to monitors",
+                    "after": "Tolerance in seconds for missed MDS beacons to monitors"
+                }
+            },
+            "mds_join_fs": {
+                "long_desc": {
+                    "before": "This setting indicates which file system name the MDS should prefer to join (affinity). The monitors will try to have the MDS cluster safely reach a state where all MDS have strong affinity, even via failovers to a standby.",
+                    "after": "This setting indicates which CephFS file system the MDS should prefer to join (affinity). The monitors will try to have the MDS cluster safely reach a state where all MDS have strong affinity, even via failovers to a standby."
+                },
+                "desc": {
+                    "before": "file system MDS prefers to join",
+                    "after": "File system MDS prefers to join"
+                }
+            },
+            "mds_alternate_name_max": {
+                "desc": {
+                    "before": "set the maximum length of alternate names for dentries",
+                    "after": "Set the maximum length of alternate names for dentries"
+                }
+            },
+            "mds_session_cap_acquisition_decay_rate": {
+                "desc": {
+                    "before": "decay rate for session readdir caps leading to readdir throttle",
+                    "after": "Decay rate for session readdir caps leading to readdir throttle"
+                }
+            },
+            "mds_heartbeat_reset_grace": {
+                "desc": {
+                    "before": "the basic unit of tolerance in how many circles in a loop, which will keep running by holding the mds_lock, it must trigger to reset heartbeat",
+                    "after": "Tolerance in seconds for long-running MDS operations which do not periodically reset the heartbeat timeout."
+                }
+            },
+            "mds_recall_warning_decay_rate": {
+                "desc": {
+                    "before": "decay rate for warning on slow session cap recall",
+                    "after": "Decay rate for warning on slow session cap recall"
+                }
+            },
+            "mds_recall_global_max_decay_threshold": {
+                "desc": {
+                    "before": "decay threshold for throttle on recalled caps globally",
+                    "after": "Decay threshold for throttle on recalled caps globally"
+                }
+            },
+            "mds_health_cache_threshold": {
+                "desc": {
+                    "before": "threshold for cache size to generate health warning",
+                    "after": "Threshold for cache size to generate health warning"
+                }
+            },
+            "mds_cap_acquisition_throttle_retry_request_timeout": {
+                "desc": {
+                    "before": "timeout in seconds after which a client request is retried due to cap acquisition throttling",
+                    "after": "Timeout in seconds after which a client request is retried due to cap acquisition throttling"
+                }
+            },
+            "mds_recall_max_caps": {
+                "desc": {
+                    "before": "maximum number of caps to recall from client session in single recall",
+                    "after": "Maximum number of caps to recall from a client session in single recall. Note that this is an integer, though the default value may be displayed with a B suffix."
+                }
+            },
+            "mds_log_minor_segments_per_major_segment": {
+                "desc": {
+                    "before": "number of minor segments per major segment.",
+                    "after": "Number of minor segments per major segment."
+                }
+            },
+            "mds_recall_max_decay_threshold": {
+                "desc": {
+                    "before": "decay threshold for throttle on recalled caps on a session",
+                    "after": "Decay threshold for throttle on recalled caps on a session"
+                }
+            },
+            "mds_reconnect_timeout": {
+                "desc": {
+                    "before": "timeout in seconds to wait for clients to reconnect during MDS reconnect recovery state",
+                    "after": "Timeout in seconds to wait for clients to reconnect during MDS reconnect recovery state"
+                }
+            },
+            "mds_cache_reservation": {
+                "fmt_desc": {
+                    "before": "The cache reservation (memory or inodes) for the MDS cache to maintain. Once the MDS begins dipping into its reservation, it will recall client state until its cache size shrinks to restore the reservation.",
+                    "after": "The percentage of the configured cache size to reserve. Once the MDS begins dipping into its reservation, it will recall client state until its cache size shrinks to restore the reservation. In other words, (1 - this value) is a cache fullness high water mark above which client caps will be recalled."
+                },
+                "desc": {
+                    "before": "amount of memory to reserve for future cached objects",
+                    "after": "Amount of memory to reserve for future cached objects"
+                }
+            },
+            "mds_session_cache_liveness_magnitude": {
+                "desc": {
+                    "before": "decay magnitude for preemptively recalling caps on quiet client",
+                    "after": "Decay magnitude for preemptively recalling caps on quiet client"
+                }
+            },
+            "mds_cache_release_free_interval": {
+                "desc": {
+                    "before": "interval in seconds between heap releases",
+                    "after": "Interval in seconds between heap releases"
+                }
+            },
+            "mds_cache_quiesce_decay_rate": {
+                "desc": {
+                    "before": "decay rate for quiescing inodes throttle",
+                    "after": "Decay rate for quiescing inodes throttle"
+                }
+            },
+            "mds_cache_trim_decay_rate": {
+                "desc": {
+                    "before": "decay rate for trimming MDS cache throttle",
+                    "after": "Decay rate for trimming MDS cache throttle"
+                }
+            },
+            "mds_cache_quiesce_splitauth": {
+                "desc": {
+                    "before": "allow recursive quiesce across auth boundaries",
+                    "after": "Allow recursive quiesce across auth boundaries"
+                }
+            },
+            "mds_fscrypt_last_block_max_size": {
+                "desc": {
+                    "before": "maximum size of the last block without the header along with a truncate request when the fscrypt is enabled.",
+                    "after": "Maximum size of the last block without the header along with a truncate request when the fscrypt is enabled."
+                }
+            },
+            "mds_heartbeat_grace": {
+                "desc": {
+                    "before": "tolerance in seconds for MDS internal heartbeat",
+                    "after": "Tolerance in seconds for MDS internal heartbeats"
+                }
+            },
+            "mds_numa_node": {
+                "desc": {
+                    "before": "set mds's cpu affinity to a numa node (-1 for none)",
+                    "after": "Set MDS CPU affinity to a NUMA node (-1 for none)"
+                }
+            },
+            "mds_cache_quiesce_threshold": {
+                "desc": {
+                    "before": "threshold for number of inodes that can be quiesced",
+                    "after": "Threshold for number of inodes that can be quiesced"
+                }
+            },
+            "mds_cache_memory_limit": {
+                "long_desc": {
+                    "before": "This sets a target maximum memory usage of the MDS cache and is the primary tunable to limit the MDS memory usage. The MDS will try to stay under a reservation of this limit (by default 95%; 1 - mds_cache_reservation) by trimming unused metadata in its cache and recalling cached items in the client caches. It is possible for the MDS to exceed this limit due to slow recall from clients. The mds_health_cache_threshold (150%) sets a cache full threshold for when the MDS signals a cluster health warning.",
+                    "after": "This sets a target maximum memory usage of the MDS cache and is the primary tunable to limit MDS memory usage. The MDS will try to stay under a reservation of this limit (by default 95%; 1 - mds_cache_reservation) by trimming unused metadata in its cache and recalling cached items in the client caches. It is possible for the MDS to exceed this limit due to slow recall from clients. The mds_health_cache_threshold (150%) sets a cache full threshold for when the MDS signals a cluster health warning."
+                },
+                "desc": {
+                    "before": "target maximum memory usage of MDS cache",
+                    "after": "Target maximum memory usage of MDS cache"
+                }
+            },
+            "mds_decay_halflife": {
+                "desc": {
+                    "before": "rate of decay for temperature counters on each directory for balancing",
+                    "after": "Rate of decay for temperature counters on each directory for balancing"
+                }
+            },
+            "mds_cache_trim_threshold": {
+                "desc": {
+                    "before": "threshold for number of dentries that can be trimmed",
+                    "after": "Threshold for number of dentries that can be trimmed"
+                }
+            },
+            "mds_cache_quiesce_delay": {
+                "desc": {
+                    "before": "delay before starting recursive quiesce inode operations",
+                    "after": "Delay before starting recursive quiesce inode operations"
+                }
+            },
+            "mds_dir_max_commit_size": {
+                "fmt_desc": {
+                    "before": "The maximum size of a directory update before Ceph breaks it into smaller transactions (MB).",
+                    "after": "The maximum size of a directory update before the MDS splits it into smaller transactions (MB)."
+                },
+                "desc": {
+                    "before": "maximum size in megabytes for a RADOS write to a directory",
+                    "after": "Maximum size in mebibytes for a RADOS write to a directory"
+                }
+            },
+            "mds_file_blockdiff_max_concurrent_object_scans": {
+                "desc": {
+                    "before": "maximum number of concurrent object scans",
+                    "after": "Maximum number of concurrent object scans"
+                }
+            },
+            "mds_enforce_unique_name": {
+                "desc": {
+                    "before": "require MDS name is unique in the cluster",
+                    "after": "Require unique MDS names"
+                }
+            },
+            "mds_sessionmap_keys_per_op": {
+                "desc": {
+                    "before": "number of omap keys to read from the SessionMap in one operation",
+                    "after": "Number of omap keys to read from the SessionMap in one operation"
+                }
+            },
+            "mds_session_blocklist_on_evict": {
+                "desc": {
+                    "before": "blocklist clients that have been evicted",
+                    "after": "Blocklist clients that have been evicted"
+                }
+            },
+            "mds_data": {
+                "desc": {
+                    "before": "path to MDS data and keyring",
+                    "after": "Path to MDS data and keyring"
+                }
+            },
+            "mds_beacon_interval": {
+                "desc": {
+                    "before": "interval in seconds between MDS beacon messages sent to monitors",
+                    "after": "Interval in seconds between MDS beacon messages sent to Monitors"
+                }
+            },
+            "mds_dir_keys_per_op": {
+                "desc": {
+                    "before": "number of directory entries to read in one RADOS operation",
+                    "after": "Number of directory entries to read in one RADOS operation"
+                }
+            },
+            "mds_session_cache_liveness_decay_rate": {
+                "desc": {
+                    "before": "decay rate for session liveness leading to preemptive cap recall",
+                    "after": "Decay rate for session liveness leading to preemptive cap recall"
+                }
+            },
+            "mds_health_summarize_threshold": {
+                "desc": {
+                    "before": "threshold of number of clients to summarize late client recall",
+                    "after": "Threshold number of clients to summarize late client recall"
+                }
+            },
+            "mds_cache_quiesce_sleep": {
+                "desc": {
+                    "before": "sleep time for request after passing quiesce threshold",
+                    "after": "Sleep time for requests after passing the quiesce threshold"
+                }
+            },
+            "mds_cache_mid": {
+                "desc": {
+                    "before": "midpoint for MDS cache LRU",
+                    "after": "Midpoint for MDS cache LRU"
+                }
+            },
+            "mds_max_file_recover": {
+                "desc": {
+                    "before": "maximum number of files to recover file sizes in parallel",
+                    "after": "Maximum number of files for which to recover file sizes in parallel"
+                }
+            },
+            "mds_recall_max_decay_rate": {
+                "desc": {
+                    "before": "decay rate for throttle on recalled caps on a session",
+                    "after": "Decay rate for throttle on recalled caps on a session"
+                }
+            },
+            "mds_session_max_caps_throttle_ratio": {
+                "desc": {
+                    "before": "ratio of mds_max_caps_per_client that client must exceed before readdir may be throttled by cap acquisition throttle",
+                    "after": "Ratio of mds_max_caps_per_client that client must exceed before readdir may be throttled by cap acquisition throttle"
+                }
+            },
+            "mds_session_blocklist_on_timeout": {
+                "desc": {
+                    "before": "blocklist clients whose sessions have become stale",
+                    "after": "Blocklist clients whose sessions have become stale"
+                }
+            },
+            "mds_cache_trim_interval": {
+                "desc": {
+                    "before": "interval in seconds between cache trimming",
+                    "after": "Interval in seconds between cache trims"
+                }
+            },
+            "mds_recall_warning_threshold": {
+                "desc": {
+                    "before": "decay threshold for warning on slow session cap recall",
+                    "after": "Decay threshold for warning on slow session cap recall"
+                }
+            }
+        },
+        "rgw.yaml.in": {
+            "rgw_sts_key": {
+                "default": {
+                    "before": "sts",
+                    "after": ""
+                }
+            },
+            "rgw_dynamic_resharding_reduction_wait": {
+                "long_desc": {
+                    "before": "In order to avoid resharding buckets with object counts that fluctuate up and down regularly, we implemement a delay between noting a shard reduction might be appropriate and when it's actually done. This allows us to cancel the reshard operation if the number of object significantly increases during this delay. WARNING: Setting this value too low could result in significantly reduced cluster performance.",
+                    "after": "In order to avoid resharding buckets with object counts that fluctuate up and down regularly, we implement a delay between noting a shard reduction might be appropriate and when it's actually done. This allows us to cancel the reshard operation if the number of object significantly increases during this delay. WARNING: Setting this value too low could result in significantly reduced cluster performance."
+                }
+            },
+            "rgw_max_put_size": {
+                "long_desc": {
+                    "before": "Plain object upload is capped at this amount of data. In order to upload larger objects, a special composite upload mechanism is required multi-part upload (MPU) for S3 and DLO and SLO for Swift.  Note that this value also limits the size of individual chunks uploaded for MPU and DLO/SLO objects, thus the larget composite object that can be uploaded is of size ``rgw_max_put_size`` * ``rgw_multipart_part_upload_limit``",
+                    "after": "Plain object upload is capped at this amount of data. In order to upload larger objects, a special composite upload mechanism is required multi-part upload (MPU) for S3 and DLO and SLO for Swift.  Note that this value also limits the size of individual chunks uploaded for MPU and DLO/SLO objects, thus the largest composite object that can be uploaded is of size ``rgw_max_put_size`` * ``rgw_multipart_part_upload_limit``"
+                }
+            },
+            "rgw_nfs_run_quota_threads": {
+                "default": {
+                    "before": false,
+                    "after": true
+                },
+                "desc": {
+                    "before": "run quota threads in librgw (default off)",
+                    "after": "run quota threads in librgw (default on)"
+                }
+            },
+            "rgw_filter": {
+                "enum_values": {
+                    "before": [
+                        "none",
+                        "base",
+                        "d4n",
+                        "posix"
+                    ],
+                    "after": [
+                        "none",
+                        "base",
+                        "d4n"
+                    ]
+                }
+            },
+            "rgw_verify_ssl": {
+                "desc": {
+                    "before": "Should RGW verify SSL when connecing to a remote HTTP server",
+                    "after": "Should RGW verify SSL when connecting to a remote HTTP server"
+                }
+            },
+            "rgw_numa_node": {
+                "desc": {
+                    "before": "set the RGW daemon'ss CPU affinity to a NUMA node (-1 for none)",
+                    "after": "set the RGW daemon's CPU affinity to a NUMA node (-1 for none)"
+                }
+            },
+            "rgw_data_log_window": {
+                "long_desc": {
+                    "before": "The data log keeps information about buckets that have objectst that were modified within a specific timeframe. The sync process then knows which buckets are needed to be scanned for data sync.",
+                    "after": "The data log keeps information about buckets that have objects that were modified within a specific timeframe. The sync process then knows which buckets are needed to be scanned for data sync."
+                }
+            },
+            "rgw_d4n_l1_write_open_flags": {
+                "long_desc": {
+                    "before": "For example, to configure synchronized I/O, fcntl-linux.h defines (converted from octal) O_SYNC = 1052672 O_DSYNC = 4096 (0 for no modification of the flags)",
+                    "after": "For example, to configure synchronized I/O, fcntl-linux.h defines (converted from octal) O_SYNC = 1052672 O_DSYNC = 4096 O_DIRECT = 16384 O_SYNC | O_DIRECT = 1118208 O_DSYNC | O_DIRECT = 65552 (0 for no modification of the flags)"
+                },
+                "default": {
+                    "before": 1052672,
+                    "after": 4096
+                }
+            },
+            "rgw_debug_inject_latency_bi_unlink": {
+                "desc": {
+                    "before": "Latency (in seconds) injected before rgw bucket index unlink op calls to simulate queueing latency and validate behavior of simultaneuous delete requests which target the same object.",
+                    "after": "Latency (in seconds) injected before rgw bucket index unlink op calls to simulate queueing latency and validate behavior of simultaneous delete requests which target the same object."
+                }
+            },
+            "rgw_data_log_changes_size": {
+                "fmt_desc": {
+                    "before": "",
+                    "after": "The number of in-memory entries to hold for the data changes log."
+                },
+                "fmt_dsec": {
+                    "before": "The number of in-memory entries to hold for the data changes log.",
+                    "after": ""
+                }
+            },
+            "rgw_backend_store": {
+                "enum_values": {
+                    "before": [
+                        "rados",
+                        "dbstore",
+                        "motr",
+                        "daos"
+                    ],
+                    "after": [
+                        "rados",
+                        "dbstore",
+                        "motr",
+                        "daos",
+                        "posix"
+                    ]
+                }
+            },
+            "rgw_cross_domain_policy": {
+                "long_desc": {
+                    "before": "Returned cross domain policy when accessing the crossdomain.xml resource (Swift compatiility).",
+                    "after": "Returned cross domain policy when accessing the crossdomain.xml resource (Swift compatibility)."
+                }
+            },
+            "rgw_lc_max_wp_worker": {
+                "long_desc": {
+                    "before": "Number of threads in per-LCWorker workpools--used to accelerate per-bucket processing",
+                    "after": "Number of coroutines in per-LCWorker workpools--used to accelerate per-bucket processing"
+                },
+                "fmt_desc": {
+                    "before": "This option specifies the number of threads in each lifecycle workers work pool. This option can help accelerate processing each bucket.",
+                    "after": "This option specifies the number of coroutines in each lifecycle workers work pool. This option can help accelerate processing each bucket."
+                },
+                "default": {
+                    "before": 3,
+                    "after": 128
+                },
+                "desc": {
+                    "before": "Number of workpool threads per LCWorker",
+                    "after": "Number of workpool coroutines per LCWorker"
+                }
+            },
+            "rgw_kafka_connection_idle": {
+                "long_desc": {
+                    "before": "A conection will be considered \"idle\" if no messages are sent to it for more than the time defined. Note that the connection will not be considered idle, even if it is down, as long as there are attempts to send messages to it.",
+                    "after": "A connection will be considered \"idle\" if no messages are sent to it for more than the time defined. Note that the connection will not be considered idle, even if it is down, as long as there are attempts to send messages to it."
+                }
+            },
+            "rgw_content_length_compat": {
+                "long_desc": {
+                    "before": "Try to handle requests with abiguous multiple content length headers (Content-Length, Http-Content-Length).",
+                    "after": "Try to handle requests with ambiguous multiple content length headers (Content-Length, Http-Content-Length)."
+                }
+            },
+            "rgw_scheduler_type": {
+                "fmt_desc": {
+                    "before": "The RGW scheduler to use. Valid values are ``throttler` and\n``dmclock``. Currently defaults to ``throttler`` which throttles Beast\nfrontend requests. ``dmclock` is *experimental* and requires the\n``dmclock`` to be included in the ``experimental_feature_enabled``\nconfiguration option.\n\nThe options below tune the experimental dmclock scheduler. For\nadditional reading on dmclock, see :ref:`dmclock-qos`. `op_class` for the flags below is\none of ``admin``, ``auth``, ``metadata``, or ``data``.\n",
+                    "after": "The RGW scheduler to use. Valid values are ``throttler`` and\n``dmclock``. Currently defaults to ``throttler`` which throttles Beast\nfrontend requests. ``dmclock`` is *experimental* and requires\n``dmclock`` to be included in the ``experimental_feature_enabled``\nconfiguration option.\n\nThe options below tune the experimental dmclock scheduler. For\nadditional reading on dmclock, see :ref:`dmclock-qos`. `op_class` for the flags below is\none of ``admin``, ``auth``, ``metadata``, or ``data``.\n"
+                },
+                "desc": {
+                    "before": "Set the type of dmclock scheduler, defaults to throttler Other valid values are dmclock which is experimental",
+                    "after": "Set the type of dmclock scheduler, defaults to throttler. Other valid value is dmclock which is experimental."
+                }
+            }
+        },
+        "osd.yaml.in": {
+            "osd_mclock_scheduler_client_lim": {
+                "see_also": {
+                    "before": [
+                        "osd_op_queue"
+                    ],
+                    "after": [
+                        "osd_op_queue",
+                        "osd_mclock_profile"
+                    ]
+                },
+                "desc": {
+                    "before": "IO limit for each client (default) over reservation. The default value of 0 specifies no limit enforcement, which means each client can use the maximum possible IOPS capacity of the OSD. Any value greater than 0 and up to 1.0 specifies the upper IO limit over reservation that each client receives in terms of a fraction of the OSD's maximum IOPS capacity.",
+                    "after": "IO limit for each client (default) over reservation. The default value of 0 specifies no limit enforcement, which means each client can use the maximum possible IOPS capacity of the OSD. Any value greater than 0 and up to 1.0 specifies the upper IO limit over reservation that each client receives in terms of a fraction of the OSD's maximum IOPS capacity. Ignored unless osd_mclock_profile is set to 'custom'."
+                }
+            },
+            "osd_mclock_scheduler_background_best_effort_wgt": {
+                "see_also": {
+                    "before": [
+                        "osd_op_queue"
+                    ],
+                    "after": [
+                        "osd_op_queue",
+                        "osd_mclock_profile"
+                    ]
+                },
+                "desc": {
+                    "before": "IO share for each background best_effort over reservation",
+                    "after": "IO share for each background best_effort over reservation Ignored unless osd_mclock_profile is set to 'custom'."
+                }
+            },
+            "osd_mclock_scheduler_background_recovery_lim": {
+                "see_also": {
+                    "before": [
+                        "osd_op_queue"
+                    ],
+                    "after": [
+                        "osd_op_queue",
+                        "osd_mclock_profile"
+                    ]
+                },
+                "desc": {
+                    "before": "IO limit for background recovery over reservation. The default value of 0 specifies no limit enforcement, which means background recovery operation can use the maximum possible IOPS capacity of the OSD. Any value greater than 0 and up to 1.0 specifies the upper IO limit over reservation that background recovery operation receives in terms of a fraction of the OSD's maximum IOPS capacity.",
+                    "after": "IO limit for background recovery over reservation. The default value of 0 specifies no limit enforcement, which means background recovery operation can use the maximum possible IOPS capacity of the OSD. Any value greater than 0 and up to 1.0 specifies the upper IO limit over reservation that background recovery operation receives in terms of a fraction of the OSD's maximum IOPS capacity. Ignored unless osd_mclock_profile is set to 'custom'."
+                }
+            },
+            "osd_deep_scrub_stride": {
+                "default": {
+                    "before": "512_K",
+                    "after": "4_M"
+                }
+            },
+            "osd_mclock_scheduler_background_best_effort_res": {
+                "see_also": {
+                    "before": [
+                        "osd_op_queue"
+                    ],
+                    "after": [
+                        "osd_op_queue",
+                        "osd_mclock_profile"
+                    ]
+                },
+                "desc": {
+                    "before": "IO proportion reserved for background best_effort (default). The default value of 0 specifies the lowest possible reservation. Any value greater than 0 and up to 1.0 specifies the minimum IO proportion to reserve for background best_effort operations in terms of a fraction of the OSD's maximum IOPS capacity.",
+                    "after": "IO proportion reserved for background best_effort (default). The default value of 0 specifies the lowest possible reservation. Any value greater than 0 and up to 1.0 specifies the minimum IO proportion to reserve for background best_effort operations in terms of a fraction of the OSD's maximum IOPS capacity. Ignored unless osd_mclock_profile is set to 'custom'."
+                }
+            },
+            "osd_mclock_scheduler_background_recovery_wgt": {
+                "see_also": {
+                    "before": [
+                        "osd_op_queue"
+                    ],
+                    "after": [
+                        "osd_op_queue",
+                        "osd_mclock_profile"
+                    ]
+                },
+                "desc": {
+                    "before": "IO share for each background recovery over reservation",
+                    "after": "IO share for each background recovery over reservation Ignored unless osd_mclock_profile is set to 'custom'."
+                }
+            },
+            "osd_mclock_scheduler_client_wgt": {
+                "see_also": {
+                    "before": [
+                        "osd_op_queue"
+                    ],
+                    "after": [
+                        "osd_op_queue",
+                        "osd_mclock_profile"
+                    ]
+                },
+                "desc": {
+                    "before": "IO share for each client (default) over reservation",
+                    "after": "IO share for each client (default) over reservation Ignored unless osd_mclock_profile is set to 'custom'."
+                }
+            },
+            "osd_mclock_scheduler_background_best_effort_lim": {
+                "see_also": {
+                    "before": [
+                        "osd_op_queue"
+                    ],
+                    "after": [
+                        "osd_op_queue",
+                        "osd_mclock_profile"
+                    ]
+                },
+                "desc": {
+                    "before": "IO limit for background best_effort over reservation. The default value of 0 specifies no limit enforcement, which means background best_effort operation can use the maximum possible IOPS capacity of the OSD. Any value greater than 0 and up to 1.0 specifies the upper IO limit over reservation that background best_effort operation receives in terms of a fraction of the OSD's maximum IOPS capacity.",
+                    "after": "IO limit for background best_effort over reservation. The default value of 0 specifies no limit enforcement, which means background best_effort operation can use the maximum possible IOPS capacity of the OSD. Any value greater than 0 and up to 1.0 specifies the upper IO limit over reservation that background best_effort operation receives in terms of a fraction of the OSD's maximum IOPS capacity. Ignored unless osd_mclock_profile is set to 'custom'."
+                }
+            },
+            "osd_mclock_scheduler_client_res": {
+                "see_also": {
+                    "before": [
+                        "osd_op_queue"
+                    ],
+                    "after": [
+                        "osd_op_queue",
+                        "osd_mclock_profile"
+                    ]
+                },
+                "desc": {
+                    "before": "IO proportion reserved for each client (default). The default value of 0 specifies the lowest possible reservation. Any value greater than 0 and up to 1.0 specifies the minimum IO proportion to reserve for each client in terms of a fraction of the OSD's maximum IOPS capacity.",
+                    "after": "IO proportion reserved for each client (default). The default value of 0 specifies the lowest possible reservation. Any value greater than 0 and up to 1.0 specifies the minimum IO proportion to reserve for each client in terms of a fraction of the OSD's maximum IOPS capacity. Ignored unless osd_mclock_profile is set to 'custom'."
+                }
+            },
+            "osd_mclock_scheduler_background_recovery_res": {
+                "see_also": {
+                    "before": [
+                        "osd_op_queue"
+                    ],
+                    "after": [
+                        "osd_op_queue",
+                        "osd_mclock_profile"
+                    ]
+                },
+                "desc": {
+                    "before": "IO proportion reserved for background recovery (default). The default value of 0 specifies the lowest possible reservation. Any value greater than 0 and up to 1.0 specifies the minimum IO proportion to reserve for background recovery operations in terms of a fraction of the OSD's maximum IOPS capacity.",
+                    "after": "IO proportion reserved for background recovery (default). The default value of 0 specifies the lowest possible reservation. Any value greater than 0 and up to 1.0 specifies the minimum IO proportion to reserve for background recovery operations in terms of a fraction of the OSD's maximum IOPS capacity. Ignored unless osd_mclock_profile is set to 'custom'."
+                }
+            }
+        }
+    }
+}
